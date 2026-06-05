@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대길산도 물때 정보</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0f1e;
+      --surface: #111827;
+      --surface2: #1a2235;
+      --border: #1e2d45;
+      --accent: #f97316;
+      --accent2: #38bdf8;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --manjo: #38bdf8;
+      --ganjo: #fb923c;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent2);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .date-form {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .date-form input[type="date"] {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 0.45rem 0.75rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .date-form input[type="date"]:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-search {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.45rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+
+    .btn-search:hover { opacity: 0.85; }
+    .btn-search:active { transform: scale(0.97); }
+
+    /* ── 히어로 ── */
+    .hero {
+      background: linear-gradient(180deg, #0d1b2e 0%, #0a0f1e 100%);
+      padding: 2rem 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .badge-tide { background: rgba(56,189,248,0.15); color: var(--accent2); border: 1px solid rgba(56,189,248,0.3); }
+    .badge-flow { background: rgba(249,115,22,0.15); color: var(--accent); border: 1px solid rgba(249,115,22,0.3); }
+    .badge-special { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
+
+    .hero-sub {
+      font-size: 0.8rem;
+      color: var(--text3);
+      margin-top: 0.5rem;
+    }
+
+    /* ── 메인 레이아웃 ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text2);
+    }
+
+    .card-header .icon { margin-right: 0.4rem; }
+    .card-header .right { font-size: 0.78rem; font-weight: 400; color: var(--text3); }
+
+    /* ── 조석 카드 ── */
+    .tide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .tide-col {
+      padding: 1rem 1.1rem;
+    }
+
+    .tide-col:first-child {
+      border-right: 1px solid var(--border);
+    }
+
+    .tide-col-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .tide-col-title.manjo { color: var(--manjo); }
+    .tide-col-title.ganjo { color: var(--ganjo); }
+
+    .tide-entry {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+    }
+
+    .tide-time {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .tide-level {
+      text-align: right;
+    }
+
+    .tide-level .cm {
+      font-size: 0.85rem;
+      color: var(--text2);
+    }
+
+    .tide-level .diff {
+      font-size: 0.75rem;
+      color: var(--text3);
+    }
+
+    /* 물흐름 바 */
+    .flow-bar-wrap {
+      padding: 0.75rem 1.1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .flow-label { font-size: 0.78rem; color: var(--text3); white-space: nowrap; }
+    .flow-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .flow-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #f97316);
+      transition: width 0.6s cubic-bezier(0.23,1,0.32,1);
+    }
+    .flow-pct { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+
+    /* ── 일출/월출 카드 ── */
+    .sun-moon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .sun-moon-item {
+      padding: 0.85rem 0.75rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .sun-moon-item:last-child { border-right: none; }
+
+    .sun-moon-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .sun-moon-label { font-size: 0.7rem; color: var(--text3); margin-bottom: 0.2rem; }
+    .sun-moon-time { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); }
+
+    /* 날씨 행 */
+    .weather-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+
+    .weather-item {
+      padding: 0.75rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .weather-item:first-child { border-right: 1px solid var(--border); }
+    .weather-icon { font-size: 1.4rem; }
+    .weather-info .wlabel { font-size: 0.7rem; color: var(--text3); }
+    .weather-info .wtext { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+
+    /* ── 시간별 날씨 테이블 ── */
+    .hourly-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table.hourly {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      min-width: 560px;
+    }
+
+    table.hourly thead th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      color: var(--text3);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    table.hourly tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    table.hourly tbody tr:last-child { border-bottom: none; }
+    table.hourly tbody tr:hover { background: var(--surface2); }
+
+    table.hourly tbody td {
+      padding: 0.55rem 0.75rem;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    table.hourly tbody td.time-cell {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    table.hourly tbody td.wave-cell { color: var(--accent2); font-weight: 700; }
+
+    /* ── 날짜 목록 ── */
+    .day-list {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.85rem 1.1rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .day-list::-webkit-scrollbar { display: none; }
+
+    .day-btn {
+      flex-shrink: 0;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+      min-width: 70px;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .day-btn:hover { border-color: var(--accent); }
+
+    .day-btn.active {
+      background: rgba(249,115,22,0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .day-btn .day-name { font-size: 0.85rem; font-weight: 700; }
+    .day-btn .day-tide { font-size: 0.72rem; color: var(--text3); margin-top: 0.15rem; }
+    .day-btn .day-flow { font-size: 0.72rem; margin-top: 0.1rem; }
+    .day-btn.active .day-tide,
+    .day-btn.active .day-flow { color: var(--accent); }
+
+    /* ── 로딩 / 에러 ── */
+    .skeleton {
+      background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .sk-line { height: 1rem; margin-bottom: 0.5rem; }
+    .sk-block { height: 5rem; margin-bottom: 0.75rem; }
+
+    .error-box {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      padding: 1.25rem;
+      color: #fca5a5;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--text3);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 480px) {
+      .sun-moon-grid { grid-template-columns: repeat(2, 1fr); }
+      .sun-moon-item:nth-child(2) { border-right: none; }
+      .sun-moon-item:nth-child(3) { border-top: 1px solid var(--border); }
+      .sun-moon-item:nth-child(4) { border-top: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header>
+  <div class="logo">⚓ TIDE INFO</div>
+  <form class="date-form" id="dateForm">
+    <input type="date" id="dateInput" />
+    <button type="submit" class="btn-search">조회</button>
+  </form>
+</header>
+
+<!-- 히어로 -->
+<div class="hero">
+  <h1 style="font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:0.2rem;">대길산도 물때</h1>
+  <p style="font-size:0.78rem;color:var(--text3);margin-bottom:0.75rem;">충청남도 보령시 · 바다타임 데이터</p>
+  <div class="hero-date" id="heroDate">--</div>
+  <div class="hero-badges" id="heroBadges"></div>
+</div>
+
+<!-- 메인 -->
+<main id="mainContent">
+  <div id="loadingView">
+    <div class="card" style="padding:1.25rem;">
+      <div class="skeleton sk-line" style="width:40%;"></div>
+      <div class="skeleton sk-block"></div>
+      <div class="skeleton sk-block"></div>
+    </div>
+  </div>
+  <div id="errorView" style="display:none;">
+    <div class="error-box" id="errorMsg">데이터를 불러오지 못했습니다.</div>
+  </div>
+  <div id="dataView" style="display:none;"></div>
+</main>
+
+<footer>
+  데이터 출처: <a href="https://www.badatime.com/1442/tide" target="_blank" rel="noopener">바다타임 (badatime.com)</a>
+  &nbsp;·&nbsp; 대길산도 (locationId: 1442) · 충청남도 보령시
+</footer>
+
+<script>
+const LOCATION_ID = 1442;
+// allorigins CORS 프록시
+const PROXY = 'https://api.allorigins.win/get?url=';
+
+// ── 날짜 유틸 ──
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+}
+function toInputDate(s) {
+  return s.length===8 ? `${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}` : '';
+}
+function fromInputDate(s) {
+  return s.replace(/-/g,'');
+}
+
+// ── 상태 ──
+let currentDate = todayStr();
+
+// ── 초기화 ──
+document.getElementById('dateInput').value = toInputDate(currentDate);
+document.getElementById('dateForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = document.getElementById('dateInput').value;
+  if (v) { currentDate = fromInputDate(v); loadData(currentDate); }
+});
+
+// ── 데이터 로드 ──
+async function loadData(dateStr) {
+  showLoading();
+  try {
+    const url = `https://www.badatime.com/${LOCATION_ID}/tide?date=${dateStr}`;
+    const proxyUrl = PROXY + encodeURIComponent(url);
+    const resp = await fetch(proxyUrl);
+    if (!resp.ok) throw new Error('프록시 응답 오류');
+    const json = await resp.json();
+    const html = json.contents;
+    if (!html) throw new Error('HTML 없음');
+    const parsed = parseHTML(html, dateStr);
+    renderData(parsed, dateStr);
+  } catch(err) {
+    showError('데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.<br><small>' + err.message + '</small>');
+  }
+}
+
+// ── HTML 파싱 ──
+function parseHTML(html, dateStr) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // 위치명
+  const location = doc.querySelector('.tit1')?.textContent?.trim() || '대길산도';
+
+  // 조석 목록 (day-row)
+  const tideList = [];
+  doc.querySelectorAll('tr.day-row').forEach(row => {
+    const dayCell = row.querySelector('td.day-cell');
+    const span = dayCell?.querySelector('span');
+    const lunar = span?.textContent?.trim() || '';
+    const dateText = dayCell?.cloneNode(true);
+    if (dateText && span) dateText.removeChild(dateText.querySelector('span'));
+    const dateRaw = dateText?.textContent?.replace(/\s+/g,'') || '';
+
+    const tideText = row.querySelector('.tide-text b')?.textContent?.trim() || '';
+    const flowText = row.querySelector('.pc-flow .progress-label b')?.textContent?.trim()
+      || row.querySelector('.tide-flow-inline .progress-label b')?.textContent?.trim() || '';
+
+    // 만조
+    const manjo = [];
+    row.querySelector('td.manjo')?.querySelectorAll('b').forEach(b => {
+      const m = b.textContent.trim().match(/(\d{2}:\d{2})\s*\((\d+)\)/);
+      if (m) {
+        const diff = b.nextElementSibling?.textContent?.trim().replace(/[▲▼\s]/g,'') || '';
+        manjo.push({ time: m[1], level: parseInt(m[2]), diff });
+      }
+    });
+
+    // 간조
+    const ganjo = [];
+    row.querySelector('td.ganjo')?.querySelectorAll('b').forEach(b => {
+      const m = b.textContent.trim().match(/(\d{2}:\d{2})\s*\((\d+)\)/);
+      if (m) {
+        const diff = b.nextElementSibling?.textContent?.trim().replace(/[▲▼\s]/g,'') || '';
+        ganjo.push({ time: m[1], level: parseInt(m[2]), diff });
+      }
+    });
+
+    // 일출/일몰
+    const sunHtml = row.querySelector('td.s_rs')?.innerHTML || '';
+    const sunParts = sunHtml.split(/<br\s*\/?>/i).map(s => s.replace(/<[^>]+>/g,'').trim());
+
+    // 월출/월몰
+    const moonHtml = row.querySelector('td.m_rs')?.innerHTML || '';
+    const moonParts = moonHtml.split(/<br\s*\/?>/i).map(s => s.replace(/<[^>]+>/g,'').trim());
+
+    // 날씨
+    const weatherImgs = row.querySelectorAll('td.weather img');
+    const weatherAm = weatherImgs[0]?.alt || '';
+    const weatherPm = weatherImgs[1]?.alt || '';
+
+    tideList.push({ date: dateRaw, lunar, tide: tideText, flow: flowText, manjo, ganjo,
+      sunrise: sunParts[0]||'', sunset: sunParts[1]||'',
+      moonrise: moonParts[0]||'', moonset: moonParts[1]||'',
+      weatherAm, weatherPm });
+  });
+
+  // 시간별 날씨
+  const hourlyWeather = [];
+  const ft = doc.querySelector('.forecast_right table.forecast_table');
+  if (ft) {
+    const rows = ft.querySelectorAll('tr');
+    const timeRow = ft.querySelector('tr.row-time');
+    const skyRow = ft.querySelector('tr.row-sky');
+    const noClass = [];
+    rows.forEach(tr => {
+      const cls = tr.className || '';
+      if (!cls.includes('row-time') && !cls.includes('row-sky')) {
+        if (tr.querySelectorAll('td').length > 0) noClass.push(tr);
+      }
+    });
+    const timeThs = timeRow ? timeRow.querySelectorAll('th') : [];
+    const skyTds = skyRow ? skyRow.querySelectorAll('td') : [];
+    const tempTds = noClass[0]?.querySelectorAll('td') || [];
+    const wdirTds = noClass[1]?.querySelectorAll('td') || [];
+    const wspdTds = noClass[2]?.querySelectorAll('td') || [];
+    const waveTds = noClass[3]?.querySelectorAll('td') || [];
+    const humTds  = noClass[4]?.querySelectorAll('td') || [];
+    const rainTds = noClass[5]?.querySelectorAll('td') || [];
+    timeThs.forEach((th, i) => {
+      hourlyWeather.push({
+        time: th.textContent.replace(/\s+/g,' ').trim(),
+        sky: skyTds[i]?.textContent?.trim() || '',
+        temp: tempTds[i]?.textContent?.trim() || '',
+        windDir: wdirTds[i]?.textContent?.trim() || '',
+        windSpd: wspdTds[i]?.textContent?.trim() || '',
+        wave: waveTds[i]?.textContent?.trim() || '',
+        humidity: humTds[i]?.textContent?.trim() || '',
+        rain: rainTds[i]?.textContent?.trim() || '',
+      });
+    });
+  }
+
+  return { location, tideList, hourlyWeather };
+}
+
+// ── 렌더링 ──
+function renderData(data, dateStr) {
+  const dayNum = parseInt(dateStr.slice(6,8));
+  const month = dateStr.slice(4,6);
+  const day = dateStr.slice(6,8);
+  const year = dateStr.slice(0,4);
+
+  // 선택된 날짜 데이터
+  const selected = data.tideList.find(d => parseInt(d.date) === dayNum) || data.tideList[0];
+
+  // 히어로 업데이트
+  document.getElementById('heroDate').textContent = `${year}.${month}.${day}`;
+  const badges = document.getElementById('heroBadges');
+  badges.innerHTML = '';
+  if (selected) {
+    if (selected.tide) {
+      const b = document.createElement('span');
+      b.className = 'badge badge-tide';
+      b.textContent = selected.tide;
+      badges.appendChild(b);
+    }
+    if (selected.flow) {
+      const b = document.createElement('span');
+      b.className = 'badge badge-flow';
+      b.textContent = selected.flow;
+      badges.appendChild(b);
+    }
+    if (selected.lunar) {
+      const b = document.createElement('span');
+      b.className = 'badge badge-special';
+      b.textContent = '음력 ' + selected.lunar;
+      badges.appendChild(b);
+    }
+  }
+
+  // 시간별 날씨 필터링
+  let inDay = false;
+  const hourly = [];
+  for (const h of data.hourlyWeather) {
+    if (h.time.includes('일 ')) {
+      const m = h.time.match(/^(\d+)일/);
+      inDay = m ? parseInt(m[1]) === dayNum : false;
+    }
+    if (inDay) hourly.push(h);
+  }
+
+  // 날씨 이모지 변환
+  function skyEmoji(text) {
+    if (!text) return '';
+    if (text.includes('맑음')) return '☀️';
+    if (text.includes('구름많음') || text.includes('차차흐려')) return '⛅';
+    if (text.includes('흐림') || text.includes('흐려')) return '☁️';
+    if (text.includes('비') || text.includes('소나기')) return '🌧️';
+    if (text.includes('눈')) return '❄️';
+    return '🌤️';
+  }
+
+  // 물흐름 색상
+  function flowColor(flow) {
+    const p = parseInt(flow);
+    if (isNaN(p)) return '#94a3b8';
+    if (p >= 80) return '#f87171';
+    if (p >= 50) return '#fb923c';
+    if (p >= 20) return '#facc15';
+    return '#38bdf8';
+  }
+
+  const dv = document.getElementById('dataView');
+  dv.innerHTML = '';
+
+  // ── 조석 카드 ──
+  if (selected) {
+    const flowPct = parseInt(selected.flow) || 0;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <span><span class="icon">🌊</span> 조석 정보</span>
+        <span class="right">${selected.lunar ? '음력 ' + selected.lunar : ''}</span>
+      </div>
+      <div class="tide-grid">
+        <div class="tide-col">
+          <div class="tide-col-title manjo">▲ 만조</div>
+          ${selected.manjo.map(e => `
+            <div class="tide-entry">
+              <span class="tide-time">${e.time}</span>
+              <span class="tide-level">
+                <div class="cm">${e.level}cm</div>
+                <div class="diff">${e.diff ? (e.diff.startsWith('-') ? e.diff : '+'+e.diff) : ''}</div>
+              </span>
+            </div>`).join('')}
+        </div>
+        <div class="tide-col">
+          <div class="tide-col-title ganjo">▼ 간조</div>
+          ${selected.ganjo.map(e => `
+            <div class="tide-entry">
+              <span class="tide-time">${e.time}</span>
+              <span class="tide-level">
+                <div class="cm">${e.level}cm</div>
+                <div class="diff">${e.diff ? (e.diff.startsWith('-') ? e.diff : '+'+e.diff) : ''}</div>
+              </span>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="flow-bar-wrap">
+        <span class="flow-label">물흐름</span>
+        <div class="flow-bar"><div class="flow-fill" style="width:${flowPct}%;background:${flowColor(selected.flow)};"></div></div>
+        <span class="flow-pct" style="color:${flowColor(selected.flow)}">${selected.flow || '-'}</span>
+      </div>
+    `;
+    dv.appendChild(card);
+
+    // ── 일출/월출 카드 ──
+    const sunCard = document.createElement('div');
+    sunCard.className = 'card';
+    sunCard.innerHTML = `
+      <div class="sun-moon-grid">
+        <div class="sun-moon-item">
+          <div class="sun-moon-icon">🌅</div>
+          <div class="sun-moon-label">일출</div>
+          <div class="sun-moon-time">${selected.sunrise || '----'}</div>
+        </div>
+        <div class="sun-moon-item">
+          <div class="sun-moon-icon">🌇</div>
+          <div class="sun-moon-label">일몰</div>
+          <div class="sun-moon-time">${selected.sunset || '----'}</div>
+        </div>
+        <div class="sun-moon-item">
+          <div class="sun-moon-icon">🌙</div>
+          <div class="sun-moon-label">월출</div>
+          <div class="sun-moon-time">${selected.moonrise || '----'}</div>
+        </div>
+        <div class="sun-moon-item">
+          <div class="sun-moon-icon">🌑</div>
+          <div class="sun-moon-label">월몰</div>
+          <div class="sun-moon-time">${selected.moonset || '----'}</div>
+        </div>
+      </div>
+      ${(selected.weatherAm || selected.weatherPm) ? `
+      <div class="weather-row">
+        <div class="weather-item">
+          <span class="weather-icon">${skyEmoji(selected.weatherAm)}</span>
+          <div class="weather-info">
+            <div class="wlabel">오전 날씨</div>
+            <div class="wtext">${selected.weatherAm || '-'}</div>
+          </div>
+        </div>
+        <div class="weather-item">
+          <span class="weather-icon">${skyEmoji(selected.weatherPm)}</span>
+          <div class="weather-info">
+            <div class="wlabel">오후 날씨</div>
+            <div class="wtext">${selected.weatherPm || '-'}</div>
+          </div>
+        </div>
+      </div>` : ''}
+    `;
+    dv.appendChild(sunCard);
+  }
+
+  // ── 시간별 날씨 카드 ──
+  if (hourly.length > 0) {
+    const hwCard = document.createElement('div');
+    hwCard.className = 'card';
+    hwCard.innerHTML = `
+      <div class="card-header">
+        <span><span class="icon">🌡️</span> 시간별 날씨</span>
+        <span class="right">3시간 간격</span>
+      </div>
+      <div class="hourly-table-wrap">
+        <table class="hourly">
+          <thead>
+            <tr>
+              <th>시간</th><th>날씨</th><th>기온</th><th>풍향/풍속</th><th>파고(m)</th><th>습도(%)</th><th>강수(mm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${hourly.map(h => `
+              <tr>
+                <td class="time-cell">${h.time}</td>
+                <td>${skyEmoji(h.sky)} ${h.sky}</td>
+                <td>${h.temp ? h.temp+'°C' : '-'}</td>
+                <td>${h.windDir} ${h.windSpd ? h.windSpd+'m/s' : ''}</td>
+                <td class="wave-cell">${h.wave || '-'}</td>
+                <td>${h.humidity || '-'}</td>
+                <td>${h.rain || '-'}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    dv.appendChild(hwCard);
+  }
+
+  // ── 날짜 목록 카드 ──
+  if (data.tideList.length > 0) {
+    const dlCard = document.createElement('div');
+    dlCard.className = 'card';
+    dlCard.innerHTML = `
+      <div class="card-header"><span><span class="icon">📅</span> 날짜별 물때</span></div>
+      <div class="day-list" id="dayList"></div>
+    `;
+    dv.appendChild(dlCard);
+
+    const dayList = dlCard.querySelector('#dayList');
+    data.tideList.forEach(d => {
+      const btn = document.createElement('button');
+      const dn = parseInt(d.date);
+      btn.className = 'day-btn' + (dn === dayNum ? ' active' : '');
+      btn.innerHTML = `
+        <div class="day-name">${d.date}</div>
+        <div class="day-tide">${d.tide || '-'}</div>
+        <div class="day-flow" style="color:${flowColor(d.flow)}">${d.flow || ''}</div>
+      `;
+      btn.addEventListener('click', () => {
+        // 날짜 계산: dateStr의 연월 + 해당 일
+        const newDate = dateStr.slice(0,6) + String(dn).padStart(2,'0');
+        currentDate = newDate;
+        document.getElementById('dateInput').value = toInputDate(newDate);
+        loadData(newDate);
+      });
+      dayList.appendChild(btn);
+    });
+  }
+
+  showData();
+}
+
+// ── UI 상태 전환 ──
+function showLoading() {
+  document.getElementById('loadingView').style.display = '';
+  document.getElementById('errorView').style.display = 'none';
+  document.getElementById('dataView').style.display = 'none';
+}
+function showError(msg) {
+  document.getElementById('loadingView').style.display = 'none';
+  document.getElementById('errorView').style.display = '';
+  document.getElementById('dataView').style.display = 'none';
+  document.getElementById('errorMsg').innerHTML = msg;
+}
+function showData() {
+  document.getElementById('loadingView').style.display = 'none';
+  document.getElementById('errorView').style.display = 'none';
+  document.getElementById('dataView').style.display = '';
+}
+
+// ── 시작 ──
+loadData(currentDate);
+</script>
+</body>
+</html>
