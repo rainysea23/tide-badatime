@@ -8,164 +8,147 @@
 <title>대길산도 물때</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-:root {
-    --bg: #0a0f1e; --bg2: #111827; --bg3: #1a2235;
-    --fg: #e2e8f0; --fg2: #94a3b8; --fg3: #64748b;
-    --accent: #38bdf8; --orange: #f97316; --green: #34d399; --red: #f87171;
-    --border: #1e2d45;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 body {
-    background: var(--bg); color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
-    min-height: 100dvh; padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* ── Header ── */
-.header {
-    background: var(--bg2); border-bottom: 1px solid var(--border);
-    padding: 12px 16px; display: flex; align-items: center;
-    justify-content: space-between; position: sticky; top: 0; z-index: 100;
-}
-.header h1 { font-size: 1.1rem; font-weight: 700; color: var(--accent); }
-.header .info { text-align: right; }
-.header .info .temp { font-size: 1.1rem; font-weight: 700; color: var(--orange); }
-.header .info .updated { font-size: 0.65rem; color: var(--fg3); display: block; }
-
-/* ── Tabs ── */
-.tabs {
-    background: var(--bg2); border-bottom: 1px solid var(--border);
-    display: flex; position: sticky; top: 48px; z-index: 99;
-}
-.tab {
-    flex: 1; text-align: center; padding: 10px; font-size: 0.85rem;
-    font-weight: 600; color: var(--fg3); cursor: pointer;
-    border-bottom: 2px solid transparent; transition: all 0.2s;
+    font-family: -apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+    background: #f5f5f5; color: #333;
+    min-height: 100dvh;
     -webkit-tap-highlight-color: transparent;
 }
-.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── Dark top section ── */
+.dark-section {
+    background: linear-gradient(180deg, #0f172a 0%, #1a2332 100%);
+    padding: 16px 16px 24px;
+    color: #e2e8f0;
+    position: sticky; top: 0; z-index: 10;
+}
+.top-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+}
+.top-row .loc { font-size: 1.05rem; font-weight: 700; }
+.top-row .date { font-size: 0.8rem; color: #94a3b8; }
+.info-row {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    font-size: 0.78rem; color: #94a3b8;
+}
+.info-row .temp { font-size: 2rem; font-weight: 700; color: #f97316; }
+.info-row .temp .unit { font-size: 1rem; color: #94a3b8; }
+.info-row .tide-info { line-height: 1.4; }
+.info-row .tide-info .tclass { font-weight: 700; color: #38bdf8; }
+
+/* ── Graph in dark section ── */
+.graph-wrap { height: 180px; margin: 8px 0 0; position: relative; }
+#tideChart { width: 100%; height: 100%; }
 
 /* ── Date chips ── */
 .chips {
-    background: var(--bg); padding: 8px 12px; display: flex; gap: 6px;
-    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    background: #fff; border-bottom: 1px solid #e5e5e5;
+    padding: 10px 16px; display: flex; gap: 6px; overflow-x: auto;
+    position: sticky; top: 252px; z-index: 9;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
-    flex-shrink: 0; background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 20px; padding: 6px 14px; font-size: 0.73rem;
-    color: var(--fg2); cursor: pointer; white-space: nowrap;
+    flex-shrink: 0; background: #f0f0f0; border: none;
+    border-radius: 20px; padding: 7px 14px; font-size: 0.75rem;
+    color: #666; cursor: pointer; white-space: nowrap;
     transition: all 0.15s; -webkit-tap-highlight-color: transparent;
 }
-.chip.selected { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.chip.selected { background: #0f172a; color: #fff; font-weight: 700; }
 
-/* ── Container ── */
-.container { max-width: 640px; margin: 0 auto; padding: 12px; }
-.panel { display: none; }
-.panel.active { display: block; }
-
-/* ── Tide cards ── */
-.tide-card {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-    padding: 14px 16px; margin-bottom: 10px; position: relative; overflow: hidden;
+/* ── Tide rows (light section) ── */
+.tide-list { max-width: 640px; margin: 0 auto; padding: 8px 12px 60px; }
+.tide-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 12px; background: #fff; border-radius: 10px;
+    margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: all 0.15s;
 }
-.tide-card.today { border-color: var(--accent); box-shadow: 0 0 20px rgba(56,189,248,0.06); }
-.tide-card .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 12px 0 0 12px; }
-.tide-card.today .bar { background: var(--accent); }
+.tide-row.today { border: 1.5px solid #38bdf8; box-shadow: 0 2px 8px rgba(56,189,248,0.1); }
 
-.card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; padding-left: 2px; }
-.card-date .day { font-size: 1rem; font-weight: 700; }
-.card-date .dow { font-size: 0.72rem; color: var(--fg3); margin-left: 6px; }
-.card-date .lunar { font-size: 0.68rem; color: var(--fg3); margin-left: 4px; }
-.badge {
-    padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700;
-    background: rgba(56,189,248,0.12); color: var(--accent);
+/* Date column */
+.row-date { width: 50px; text-align: center; flex-shrink: 0; }
+.row-date .day { font-size: 1.05rem; font-weight: 700; line-height: 1.2; }
+.row-date .dow { font-size: 0.65rem; }
+.row-date .sat { color: #3b82f6; } .row-date .sun { color: #ef4444; }
+.row-date .lunar { font-size: 0.6rem; color: #999; display: block; }
+
+/* Tide class column */
+.row-tide { width: 44px; text-align: center; flex-shrink: 0; }
+.tide-badge {
+    display: inline-block; padding: 3px 7px; border-radius: 10px;
+    font-size: 0.7rem; font-weight: 700; white-space: nowrap;
 }
-.badge.f-high { background: rgba(249,115,22,0.12); color: var(--orange); }
-.badge.f-mid { background: rgba(52,211,153,0.12); color: var(--green); }
+.tide-badge.high { background: #e8f4fd; color: #0284c7; }
+.tide-badge.mid { background: #dcfce7; color: #15803d; }
+.tide-badge.low { background: #fef3c7; color: #a16207; }
+.tide-badge.neutral { background: #f0f0f0; color: #888; }
 
-.tide-times { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.tide-group { padding-left: 2px; }
-.tide-group .label { font-size: 0.65rem; color: var(--fg3); margin-bottom: 4px; letter-spacing: 0.5px; }
-.tide-group .label.hi { color: #60a5fa; }
-.tide-group .label.lo { color: var(--orange); }
-.tide-item { display: flex; align-items: baseline; gap: 6px; padding: 2px 0; font-family: 'SF Mono','Consolas',monospace; }
-.tide-item .time { font-size: 0.9rem; font-weight: 700; }
-.tide-item .h { font-size: 0.7rem; color: var(--fg2); }
-.tide-item .diff { font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; }
-.tide-item .diff.up { background: rgba(52,211,153,0.12); color: var(--green); }
-.tide-item .diff.down { background: rgba(248,113,113,0.12); color: var(--red); }
-.card-foot { display: flex; gap: 14px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 0.68rem; color: var(--fg3); }
-
-/* ── Graph ── */
-.graph-card {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-    padding: 16px; margin-bottom: 10px;
+/* Tide times column - main content */
+.row-times { flex: 1; min-width: 0; }
+.time-line {
+    display: flex; align-items: baseline; gap: 4px;
+    font-size: 0.85rem; padding: 1px 0; font-family: 'SF Mono','Consolas',monospace;
 }
-.graph-card .g-title { font-size: 0.85rem; font-weight: 600; color: var(--fg2); margin-bottom: 4px; }
-.graph-wrap { position: relative; height: 280px; }
-#tideChart { width: 100%; height: 100%; }
+.time-line .t { font-weight: 700; }
+.time-line .h { font-size: 0.72rem; color: #888; }
+.time-line .diff { font-size: 0.62rem; margin-left: 2px; }
+.time-line .diff.up { color: #16a34a; }
+.time-line .diff.down { color: #dc2626; }
+.time-line.manjo { color: #2563eb; }
+.time-line.ganjo { color: #ea580c; }
 
-.graph-legend { display: flex; gap: 16px; justify-content: center; margin-top: 8px; font-size: 0.7rem; color: var(--fg3); }
-.graph-legend span { display: flex; align-items: center; gap: 4px; }
-.graph-legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+/* Weather icon */
+.row-wx { width: 28px; flex-shrink: 0; text-align: center; font-size: 0.65rem; color: #999; }
 
-/* ── Weather ── */
-.weather-card {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-    padding: 14px 16px; margin-bottom: 10px;
+/* ── Weather card ── */
+.wx-card {
+    max-width: 640px; margin: 8px auto; padding: 0 12px;
 }
-.weather-card h3 { font-size: 0.82rem; color: var(--fg2); margin-bottom: 8px; }
-.weather-card .w-text { font-size: 0.75rem; color: var(--fg3); line-height: 1.8; }
+.wx-inner {
+    background: #fff; border-radius: 10px; padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.wx-inner h3 { font-size: 0.82rem; color: #333; margin-bottom: 6px; }
+.wx-inner .wx-text { font-size: 0.72rem; color: #888; line-height: 1.8; }
 
 /* ── Footer ── */
-.footer { text-align: center; padding: 16px; font-size: 0.65rem; color: var(--fg3); }
-.footer a { color: var(--accent); text-decoration: none; }
+.ft { text-align: center; padding: 12px; font-size: 0.62rem; color: #bbb; }
+.ft a { color: #94a3b8; }
 </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>⚓ 대길산도</h1>
-    <div class="info">
-        <span class="temp" id="seaTemp">--°C</span>
-        <span class="updated" id="updateTime"></span>
+<!-- Dark top -->
+<div class="dark-section" id="darkSection">
+    <div class="top-row">
+        <span class="loc">⚓ 대길산도</span>
+        <span class="date" id="headerDate"></span>
     </div>
+    <div class="info-row">
+        <div class="temp" id="seaTemp">--<span class="unit">°C</span></div>
+        <div class="tide-info">
+            <div>오늘 물때 <span class="tclass" id="tideClass">-</span></div>
+            <div id="tideSummary"></div>
+        </div>
+    </div>
+    <div class="graph-wrap"><canvas id="tideChart"></canvas></div>
 </div>
 
-<div class="tabs">
-    <div class="tab active" data-panel="tide">📅 물때표</div>
-    <div class="tab" data-panel="graph">📈 그래프</div>
-    <div class="tab" data-panel="weather">🌊 날씨</div>
-</div>
-
+<!-- Date chips -->
 <div class="chips" id="chips"></div>
 
-<div class="container">
-    <div class="panel active" id="panel-tide"></div>
-    <div class="panel" id="panel-graph">
-        <div class="graph-card">
-            <div class="g-title" id="graphTitle">물때 그래프</div>
-            <div class="graph-wrap"><canvas id="tideChart"></canvas></div>
-            <div class="graph-legend">
-                <span><span class="dot" style="background:#38bdf8"></span>조위(cm)</span>
-                <span><span class="dot" style="background:#60a5fa"></span>만조</span>
-                <span><span class="dot" style="background:#f97316"></span>간조</span>
-            </div>
-        </div>
-    </div>
-    <div class="panel" id="panel-weather">
-        <div class="weather-card">
-            <h3>🌊 충남남부앞바다</h3>
-            <div class="w-text" id="weatherText"></div>
-        </div>
-    </div>
-</div>
+<!-- Tide list -->
+<div class="tide-list" id="tideList"></div>
 
-<div class="footer">
-    Data: <a href="https://www.badatime.com/1442/tide" target="_blank">바다타임</a>
-    · 3시간마다 자동 업데이트
-</div>
+<div class="wx-card"><div class="wx-inner">
+    <h3>🌊 충남남부앞바다</h3>
+    <div class="wx-text" id="wxText"></div>
+</div></div>
+
+<div class="ft">Data: <a href="https://www.badatime.com/1442/tide">바다타임</a> · 3시간마다 갱신 · <span id="updateTime"></span></div>
 
 <script>
 // ═══════════════════════════════════════════
@@ -174,258 +157,104 @@ body {
 const today = new Date();
 let tideData = [];
 let chart = null;
-let selectedDay = null;
+let selected = null;
 
 // ═══════════════════════════════════════════
-// Tab switching
+// Tide graph (cosine interpolation)
 // ═══════════════════════════════════════════
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+function buildGraph(td) {
+    if (!td) return {labels:[], values:[], hts:[], lts:[]};
 
-        if (tab.dataset.panel === 'graph') {
-            setTimeout(() => { if (selectedDay) renderGraph(selectedDay.m, selectedDay.d); }, 100);
-        }
-    });
-});
-
-// ═══════════════════════════════════════════
-// Tide Cards
-// ═══════════════════════════════════════════
-function getFlowClass(pct) {
-    if (pct == null) return '';
-    return pct >= 80 ? 'f-high' : pct >= 50 ? 'f-mid' : '';
-}
-
-function renderCards(m, d) {
-    const idx = tideData.findIndex(t => t.month === m && t.day === d);
-    if (idx < 0) return;
-    const days = tideData.slice(idx, idx + 15);
-    const todayStr = `${today.getMonth()+1}/${today.getDate()}`;
-
-    let html = '';
-    days.forEach(t => {
-        const isToday = t.month === today.getMonth()+1 && t.day === today.getDate();
-        const fc = getFlowClass(t.flow_pct);
-
-        const manjoHTML = (t.manjo||[]).map(x => `
-            <div class="tide-item">
-                <span class="time">${x.time}</span>
-                <span class="h">${x.height}cm</span>
-                <span class="diff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span>
-            </div>`).join('');
-
-        const ganjoHTML = (t.ganjo||[]).map(x => `
-            <div class="tide-item">
-                <span class="time">${x.time}</span>
-                <span class="h">${x.height}cm</span>
-                <span class="diff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span>
-            </div>`).join('');
-
-        html += `
-        <div class="tide-card ${isToday?'today':''}">
-            <div class="bar"></div>
-            <div class="card-top">
-                <div class="card-date">
-                    <span class="day">${t.month}/${t.day}(${t.dow})</span>
-                    <span class="lunar">🌙${t.lunar}</span>
-                </div>
-                <span class="badge ${fc}">${t.tide_class}물 ${t.flow_pct!=null?t.flow_pct+'%':''}</span>
-            </div>
-            <div class="tide-times">
-                <div class="tide-group">
-                    <div class="label hi">▲ 만조</div>${manjoHTML}
-                </div>
-                <div class="tide-group">
-                    <div class="label lo">▼ 간조</div>${ganjoHTML}
-                </div>
-            </div>
-            <div class="card-foot">
-                <span>☀️ ${t.sunrise_set||'-'}</span>
-                <span>🌙 ${t.moonrise_set||'-'}</span>
-            </div>
-        </div>`;
-    });
-    document.getElementById('panel-tide').innerHTML = html;
-}
-
-// ═══════════════════════════════════════════
-// Tide Graph (sinusoidal interpolation)
-// ═══════════════════════════════════════════
-function interpolateTide(dayData) {
-    // Build ordered list of manjo/ganjo events
     const events = [];
-    (dayData.manjo||[]).forEach(e => events.push({...e, type:'H'}));
-    (dayData.ganjo||[]).forEach(e => events.push({...e, type:'L'}));
+    (td.manjo||[]).forEach(e => events.push({...e, type:'H'}));
+    (td.ganjo||[]).forEach(e => events.push({...e, type:'L'}));
     events.sort((a,b) => {
-        const [ah,am] = a.time.split(':').map(Number);
-        const [bh,bm] = b.time.split(':').map(Number);
-        return (ah*60+am) - (bh*60+bm);
+        const [ah,am]=a.time.split(':').map(Number);
+        const [bh,bm]=b.time.split(':').map(Number);
+        return (ah*60+am)-(bh*60+bm);
+    });
+    if (events.length < 2) return {labels:[], values:[], hts:[], lts:[]};
+
+    const labels=[], values=[];
+    const hts=[], lts=[];
+    for (let h=0;h<24;h++) for (let m=0;m<60;m+=15) {
+        const min=h*60+m;
+        const label=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        labels.push(label);
+
+        let prev=events[events.length-1], next=events[0];
+        for(const e of events) {
+            const [eh,em]=e.time.split(':').map(Number);
+            if(eh*60+em <= min) prev=e;
+            if(eh*60+em > min) { next=e; break; }
+        }
+        let [ph,pm]=prev.time.split(':').map(Number), pmin=ph*60+pm;
+        let [nh,nm]=next.time.split(':').map(Number), nmin=nh*60+nm;
+        if(nmin<pmin) nmin+=1440;
+        const frac=(min-pmin)/(nmin-pmin);
+        const cosFrac=(1-Math.cos(frac*Math.PI))/2;
+        values.push(Math.round(prev.height+(next.height-prev.height)*cosFrac));
+    }
+
+    events.forEach(e => {
+        const [h,m]=e.time.split(':').map(Number);
+        const label=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        const idx=labels.indexOf(label);
+        if(e.type==='H') hts.push({idx,height:e.height});
+        else lts.push({idx,height:e.height});
     });
 
-    if (events.length < 2) return {labels:[], values:[]};
-
-    // Generate points every 15 minutes
-    const labels = [];
-    const values = [];
-    for (let h = 0; h < 24; h++) {
-        for (let m = 0; m < 60; m += 15) {
-            const min = h * 60 + m;
-            const label = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-            labels.push(label);
-
-            // Find surrounding events
-            let prev = events[events.length-1];
-            let next = events[0];
-            for (let i = 0; i < events.length; i++) {
-                const ei = events[i];
-                const [eih, eim] = ei.time.split(':').map(Number);
-                const eimin = eih * 60 + eim;
-                if (eimin <= min) prev = ei;
-                if (eimin > min) { next = ei; break; }
-            }
-
-            const [ph,pm] = prev.time.split(':').map(Number);
-            const [nh,nm] = next.time.split(':').map(Number);
-            let pmin = ph*60+pm;
-            let nmin = nh*60+nm;
-            if (nmin < pmin) nmin += 1440; // wrap around
-
-            const frac = (min - pmin) / (nmin - pmin);
-            const h1 = prev.height;
-            const h2 = next.height;
-            // Cosine interpolation for smooth tide curve
-            const cosFrac = (1 - Math.cos(frac * Math.PI)) / 2;
-            const value = h1 + (h2 - h1) * cosFrac;
-            values.push(Math.round(value));
-        }
-    }
-    return {labels, values, events};
+    return {labels,values,hts,lts};
 }
 
-function renderGraph(m, d) {
-    const dayData = tideData.find(t => t.month === m && t.day === d);
-    if (!dayData) return;
-
-    document.getElementById('graphTitle').textContent =
-        `${m}월 ${d}일(${dayData.dow}) 물때 그래프 · ${dayData.tide_class}물`;
-
-    const {labels, values, events} = interpolateTide(dayData);
-
-    if (chart) chart.destroy();
-
-    const ctx = document.getElementById('tideChart').getContext('2d');
-    const manjoEvents = events.filter(e => e.type === 'H');
-    const ganjoEvents = events.filter(e => e.type === 'L');
-
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels,
-            datasets: [{
-                label: '조위 (cm)',
-                data: values,
-                borderColor: '#38bdf8',
-                backgroundColor: 'rgba(56,189,248,0.05)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.3,
-                pointRadius: 0,
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                annotation: false,
+function renderGraph(td) {
+    if(chart) chart.destroy();
+    const g=buildGraph(td);
+    const ctx=document.getElementById('tideChart').getContext('2d');
+    chart=new Chart(ctx,{
+        type:'line',
+        data:{labels:g.labels,datasets:[{
+            data:g.values, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,0.08)',
+            borderWidth:2, fill:true, tension:0.3, pointRadius:0,
+        }]},
+        options:{
+            responsive:true, maintainAspectRatio:false,
+            plugins:{legend:{display:false}},
+            scales:{
+                x:{ ticks:{color:'#475569',maxTicksLimit:8,font:{size:9}}, grid:{color:'rgba(71,85,105,0.15)'}},
+                y:{ ticks:{color:'#475569',callback:v=>v+'cm',font:{size:9}}, grid:{color:'rgba(71,85,105,0.15)'}},
             },
-            scales: {
-                x: {
-                    ticks: { color: '#64748b', maxTicksLimit: 12, font: {size:10} },
-                    grid: { color: 'rgba(30,45,69,0.5)' },
-                },
-                y: {
-                    ticks: { color: '#64748b', callback: v => v + 'cm', font: {size:10} },
-                    grid: { color: 'rgba(30,45,69,0.5)' },
-                },
-            },
-            interaction: { intersect: false, mode: 'index' },
+            interaction:{intersect:false,mode:'index'},
         },
-        plugins: [{
-            id: 'tideMarkers',
-            afterDraw(chart) {
-                const ctx = chart.ctx;
-                const xAxis = chart.scales.x;
-                const yAxis = chart.scales.y;
-                const meta = chart.getDatasetMeta(0);
-
-                // Draw manjo markers
-                manjoEvents.forEach(e => {
-                    const [h,m] = e.time.split(':').map(Number);
-                    const label = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-                    const idx = labels.indexOf(label);
-                    if (idx < 0) return;
-                    const x = xAxis.getPixelForValue(idx);
-                    const y = yAxis.getPixelForValue(e.height);
-                    // Blue circle
-                    ctx.beginPath();
-                    ctx.arc(x, y, 5, 0, Math.PI*2);
-                    ctx.fillStyle = '#60a5fa';
-                    ctx.fill();
-                    ctx.strokeStyle = '#fff';
-                    ctx.lineWidth = 1.5;
-                    ctx.stroke();
-                    // Label
-                    ctx.font = 'bold 10px sans-serif';
-                    ctx.fillStyle = '#60a5fa';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`▲${e.height}`, x, y - 12);
+        plugins:[{
+            id:'markers',
+            afterDraw(c){
+                const xa=c.scales.x, ya=c.scales.y;
+                c.ctx.font='bold 9px sans-serif';
+                g.hts.forEach(({idx,height}) => {
+                    const x=xa.getPixelForValue(idx), y=ya.getPixelForValue(height);
+                    c.ctx.beginPath(); c.ctx.arc(x,y,4,0,Math.PI*2);
+                    c.ctx.fillStyle='#60a5fa'; c.ctx.fill();
+                    c.ctx.fillStyle='#60a5fa'; c.ctx.textAlign='center';
+                    c.ctx.fillText('▲'+height,x,y-10);
                 });
-
-                // Draw ganjo markers
-                ganjoEvents.forEach(e => {
-                    const [h,m] = e.time.split(':').map(Number);
-                    const label = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-                    const idx = labels.indexOf(label);
-                    if (idx < 0) return;
-                    const x = xAxis.getPixelForValue(idx);
-                    const y = yAxis.getPixelForValue(e.height);
-                    ctx.beginPath();
-                    ctx.arc(x, y, 5, 0, Math.PI*2);
-                    ctx.fillStyle = '#f97316';
-                    ctx.fill();
-                    ctx.strokeStyle = '#fff';
-                    ctx.lineWidth = 1.5;
-                    ctx.stroke();
-                    ctx.font = 'bold 10px sans-serif';
-                    ctx.fillStyle = '#f97316';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`▼${e.height}`, x, y + 20);
+                g.lts.forEach(({idx,height}) => {
+                    const x=xa.getPixelForValue(idx), y=ya.getPixelForValue(height);
+                    c.ctx.beginPath(); c.ctx.arc(x,y,4,0,Math.PI*2);
+                    c.ctx.fillStyle='#f97316'; c.ctx.fill();
+                    c.ctx.fillStyle='#f97316'; c.ctx.textAlign='center';
+                    c.ctx.fillText('▼'+height,x,y+18);
                 });
-
-                // Current time line (if today)
-                const now = new Date();
-                if (m === now.getMonth()+1 && d === now.getDate()) {
-                    const curLabel = `${String(now.getHours()).padStart(2,'0')}:30`;
-                    const idx = labels.indexOf(curLabel);
-                    if (idx >= 0) {
-                        const x = xAxis.getPixelForValue(idx);
-                        ctx.beginPath();
-                        ctx.moveTo(x, yAxis.top);
-                        ctx.lineTo(x, yAxis.bottom);
-                        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-                        ctx.setLineDash([4, 4]);
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                        ctx.setLineDash([]);
-                        ctx.font = '10px sans-serif';
-                        ctx.fillStyle = '#fff';
-                        ctx.textAlign = 'center';
-                        ctx.fillText('현재', x, yAxis.top + 12);
+                // Current time line
+                const now=new Date();
+                if(td.month===now.getMonth()+1 && td.day===now.getDate()){
+                    const curLabel=`${String(now.getHours()).padStart(2,'0')}:30`;
+                    const idx=g.labels.indexOf(curLabel);
+                    if(idx>=0){
+                        const x=xa.getPixelForValue(idx);
+                        c.ctx.beginPath(); c.ctx.moveTo(x,ya.top); c.ctx.lineTo(x,ya.bottom);
+                        c.ctx.strokeStyle='rgba(255,255,255,0.3)'; c.ctx.setLineDash([3,3]);
+                        c.ctx.lineWidth=1; c.ctx.stroke(); c.ctx.setLineDash([]);
                     }
                 }
             }
@@ -434,62 +263,102 @@ function renderGraph(m, d) {
 }
 
 // ═══════════════════════════════════════════
-// Date chips
+// Tide rows
 // ═══════════════════════════════════════════
-function renderChips(selM, selD) {
-    let html = '';
-    for (let i = 0; i < 10; i++) {
-        const d = new Date(today);
-        d.setDate(today.getDate() + i);
-        const m = d.getMonth()+1, dt = d.getDate();
-        const dow = ['일','월','화','수','목','금','토'][d.getDay()];
-        const sel = m === selM && dt === selD;
-        const isToday = i === 0;
-        html += `<button class="chip${sel?' selected':''}" onclick="selectDay(${m},${dt})">${isToday?'오늘 ':''}${m}/${dt}(${dow})</button>`;
+function getTideBadge(pct) {
+    if(pct==null) return {cls:'neutral',text:''};
+    if(pct>=80) return {cls:'high',text:'강'};
+    if(pct>=50) return {cls:'mid',text:'중'};
+    return {cls:'low',text:'약'};
+}
+
+function renderRows(m, d) {
+    const idx=tideData.findIndex(t=>t.month===m&&t.day===d);
+    if(idx<0) return;
+    const days=tideData.slice(idx,idx+15);
+
+    let html='';
+    days.forEach(t=>{
+        const isToday=t.month===today.getMonth()+1&&t.day===today.getDate();
+        const badge=getTideBadge(t.flow_pct);
+        const manjoHTML=(t.manjo||[]).map(x=>
+            `<div class="time-line manjo">
+                <span class="t">${x.time}</span><span class="h">${x.height}cm</span>
+                <span class="diff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span>
+            </div>`).join('');
+        const ganjoHTML=(t.ganjo||[]).map(x=>
+            `<div class="time-line ganjo">
+                <span class="t">${x.time}</span><span class="h">${x.height}cm</span>
+                <span class="diff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span>
+            </div>`).join('');
+        const dowCls=['일','토'].includes(t.dow) ? (t.dow==='일'?'sun':'sat') : '';
+
+        html+=`<div class="tide-row${isToday?' today':''}" onclick="selectDay(${t.month},${t.day})">
+            <div class="row-date">
+                <div class="day">${t.day}</div>
+                <div class="dow ${dowCls}">${t.dow}</div>
+                <div class="lunar">${t.lunar}</div>
+            </div>
+            <div class="row-tide">
+                <span class="tide-badge ${badge.cls}">${t.tide_class}물${badge.text?' '+badge.text:''}</span>
+            </div>
+            <div class="row-times">
+                ${manjoHTML}${ganjoHTML}
+            </div>
+        </div>`;
+    });
+    document.getElementById('tideList').innerHTML=html;
+}
+
+// ═══════════════════════════════════════════
+// Header + chips
+// ═══════════════════════════════════════════
+function renderChips(sm, sd) {
+    let html='';
+    for(let i=0;i<10;i++){
+        const d=new Date(today); d.setDate(today.getDate()+i);
+        const m=d.getMonth()+1, dt=d.getDate();
+        const dow=['일','월','화','수','목','금','토'][d.getDay()];
+        const sel=m===sm&&dt===sd;
+        html+=`<button class="chip${sel?' selected':''}" onclick="selectDay(${m},${dt})">${i===0?'오늘 ':''}${m}/${dt}(${dow})</button>`;
     }
-    document.getElementById('chips').innerHTML = html;
+    document.getElementById('chips').innerHTML=html;
 }
 
 function selectDay(m, d) {
-    selectedDay = {m, d};
-    renderCards(m, d);
-    renderChips(m, d);
+    selected={m,d};
+    const td=tideData.find(t=>t.month===m&&t.day===d);
+    if(!td) return;
 
-    const activeTab = document.querySelector('.tab.active');
-    if (activeTab && activeTab.dataset.panel === 'graph') {
-        setTimeout(() => renderGraph(m, d), 50);
-    }
+    document.getElementById('headerDate').textContent=`${m}월 ${d}일 (${td.dow})`;
+    document.getElementById('tideClass').textContent=`${td.tide_class}물`;
+    document.getElementById('tideSummary').textContent=
+        `만조 ${(td.manjo||[]).map(x=>x.time).join(', ')} · 간조 ${(td.ganjo||[]).map(x=>x.time).join(', ')}`;
+
+    renderGraph(td);
+    renderRows(m, d);
+    renderChips(m, d);
 }
 
 // ═══════════════════════════════════════════
 // Load
 // ═══════════════════════════════════════════
-async function load() {
-    try {
-        const resp = await fetch('tide_data.json?t=' + Date.now());
-        const data = await resp.json();
-        tideData = data.tides || [];
+async function load(){
+    try{
+        const resp=await fetch('tide_data.json?t='+Date.now());
+        const data=await resp.json();
+        tideData=data.tides||[];
 
-        document.getElementById('updateTime').textContent =
-            '갱신: ' + (data.updated||'').replace('T',' ').slice(5,16);
-        document.getElementById('seaTemp').textContent =
-            data.sea_temp ? data.sea_temp.toFixed(1) + '°C' : '--°C';
+        document.getElementById('seaTemp').innerHTML=data.sea_temp?data.sea_temp.toFixed(1)+'<span class="unit">°C</span>':'--°C';
+        document.getElementById('updateTime').textContent='갱신: '+(data.updated||'').replace('T',' ').slice(5,16);
+        document.getElementById('wxText').innerHTML=(data.sea_weather||[]).slice(0,6).join('<br>')||'-';
 
-        // Weather panel
-        const w = data.sea_weather || [];
-        document.getElementById('weatherText').innerHTML =
-            w.length > 0 ? w.slice(0,8).join('<br>') : '날씨 정보 없음';
-
-        // Init
-        const m = today.getMonth()+1, d = today.getDate();
+        const m=today.getMonth()+1, d=today.getDate();
         selectDay(m, d);
-
-    } catch(e) {
-        document.getElementById('panel-tide').innerHTML =
-            `<div class="tide-card" style="text-align:center;padding:40px;color:var(--fg3)">⚠️ 데이터를 불러오지 못했습니다</div>`;
+    }catch(e){
+        document.getElementById('tideList').innerHTML='<div style="text-align:center;padding:40px;color:#999">데이터를 불러오지 못했습니다</div>';
     }
 }
-
 load();
 </script>
 </body>
