@@ -111,8 +111,21 @@ body {
     background: #fff; border-radius: 10px; padding: 14px 16px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
-.wx-inner h3 { font-size: 0.82rem; color: #333; margin-bottom: 6px; }
-.wx-inner .wx-text { font-size: 0.72rem; color: #888; line-height: 1.8; }
+.wx-inner h3 { font-size: 0.82rem; color: #333; margin-bottom: 10px; }
+.wx-day { margin-bottom: 12px; }
+.wx-day .wx-date { font-size: 0.75rem; font-weight: 700; color: #333; margin-bottom: 6px; }
+.wx-row {
+    display: flex; align-items: center; gap: 10px; padding: 6px 8px;
+    background: #f8fafc; border-radius: 8px; margin-bottom: 4px;
+    font-size: 0.73rem;
+}
+.wx-row .wx-when { font-weight: 700; color: #64748b; min-width: 28px; }
+.wx-row .wx-wicon { font-size: 1.2rem; min-width: 24px; text-align: center; }
+.wx-row .wx-cond { font-weight: 600; color: #334155; min-width: 80px; }
+.wx-row .wx-wind { color: #3b82f6; min-width: 90px; }
+.wx-row .wx-wave { color: #06b6d4; }
+.wx-ext { font-size: 0.7rem; color: #94a3b8; line-height: 1.6; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e5e5; }
+.wx-ext b { color: #64748b; }
 
 /* ── Footer ── */
 .ft { text-align: center; padding: 12px; font-size: 0.62rem; color: #bbb; }
@@ -143,9 +156,10 @@ body {
 <!-- Tide list -->
 <div class="tide-list" id="tideList"></div>
 
-<div class="wx-card"><div class="wx-inner">
-    <h3>🌊 충남남부앞바다</h3>
-    <div class="wx-text" id="wxText"></div>
+<div class="wx-card"><div class="wx-inner" id="wxContent">
+    <h3>🌊 바다날씨</h3>
+    <div id="wxDaily"></div>
+    <div id="wxExtended" style="margin-top:10px;"></div>
 </div></div>
 
 <div class="ft">Data: <a href="https://www.badatime.com/1442/tide">바다타임</a> · 3시간마다 갱신 · <span id="updateTime"></span></div>
@@ -356,6 +370,54 @@ function selectDay(m, d) {
     renderChips(m, d);
 }
 
+function weatherIcon(cond) {
+    if(!cond) return '🌤️';
+    if(cond.includes('비')||cond.includes('소나기')) return '🌧️';
+    if(cond.includes('눈')) return '🌨️';
+    if(cond.includes('맑음')) return '☀️';
+    if(cond.includes('구름많음')) return '⛅';
+    if(cond.includes('흐림')) return '☁️';
+    if(cond.includes('안개')) return '🌫️';
+    return '🌤️';
+}
+
+function renderWeather(sw){
+    const dailyDiv=document.getElementById('wxDaily');
+    const extDiv=document.getElementById('wxExtended');
+    const titleEl=document.querySelector('.wx-inner h3');
+
+    const area=sw.area||'바다날씨';
+    titleEl.textContent='🌊 '+area;
+
+    // Daily forecast
+    let html='';
+    (sw.daily||[]).slice(0,3).forEach(day=>{
+        html+=`<div class="wx-day"><div class="wx-date">📅 ${day.date}</div>`;
+        (day.times||[]).forEach(t=>{
+            html+=`<div class="wx-row">
+                <span class="wx-when">${t.when}</span>
+                <span class="wx-wicon">${weatherIcon(t.weather)}</span>
+                <span class="wx-cond">${t.weather}</span>
+                <span class="wx-wind">🌬️ ${t.wind_dir} ${t.wind_speed}m/s</span>
+                <span class="wx-wave">🌊 ${t.wave}m</span>
+            </div>`;
+        });
+        html+='</div>';
+    });
+    dailyDiv.innerHTML=html;
+
+    // Extended forecast
+    let extHtml='';
+    (sw.extended||[]).forEach(row=>{
+        extHtml+='<div class="wx-ext">';
+        row.forEach((cell,i)=>{
+            extHtml+=`${i>0?' · ':''}${i===0?'<b>'+cell+'</b>':cell}`;
+        });
+        extHtml+='</div>';
+    });
+    extDiv.innerHTML=extHtml;
+}
+
 // ═══════════════════════════════════════════
 // Load
 // ═══════════════════════════════════════════
@@ -367,7 +429,8 @@ async function load(){
 
         document.getElementById('seaTemp').innerHTML=data.sea_temp?data.sea_temp.toFixed(1)+'<span class="unit">°C</span>':'--°C';
         document.getElementById('updateTime').textContent='갱신: '+(data.updated||'').replace('T',' ').slice(5,16);
-        document.getElementById('wxText').innerHTML=(data.sea_weather||[]).slice(0,6).join('<br>')||'-';
+        // Render weather
+        renderWeather(data.sea_weather||{});
 
         const m=today.getMonth()+1, d=today.getDate();
         selectDay(m, d);

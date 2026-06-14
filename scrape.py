@@ -108,20 +108,63 @@ def parse_tide_table(soup):
 
 
 def parse_sea_weather(soup):
-    """Parse sea weather forecast (table[3] or table[2])"""
+    """Parse sea weather forecast tables"""
     tables = soup.find_all("table")
-    forecasts = []
-    for ti in [2, 3, 4, 5]:
-        if ti >= len(tables):
-            break
-        table = tables[ti]
-        trs = table.find_all("tr")
+    result = {"area": "", "daily": [], "extended": [], "hourly_labels": [], "hourly_data": {}}
+
+    # Table 2: daily sea weather (바다날씨)
+    if len(tables) > 2:
+        trs = tables[2].find_all("tr")
+        if trs:
+            result["area"] = trs[0].get_text(strip=True)
+        if len(trs) > 2:
+            for tr in trs[2:]:
+                tds = tr.find_all("td")
+                texts = [td.get_text(strip=True) for td in tds]
+                if not texts:
+                    continue
+                # Format: ["6.14(일)", "오전", "구름많음", "남동-남", "3-6", "0.5-1.0"]
+                # or: ["오후", "구름많고소나기", "북-북동", "3-6", "0.5-0.5"]
+                if "(" in texts[0] and ")" in texts[0]:
+                    # New date row with am/pm
+                    date_str = texts[0]
+                    am_data = texts[1:] if len(texts) > 1 else []
+                    result["daily"].append({"date": date_str, "times": []})
+                    if len(am_data) >= 5:
+                        result["daily"][-1]["times"].append({
+                            "when": am_data[0], "weather": am_data[1],
+                            "wind_dir": am_data[2], "wind_speed": am_data[3], "wave": am_data[4],
+                        })
+                elif texts[0] in ("오전", "오후"):
+                    when = texts[0]
+                    data = texts[1:]
+                    if result["daily"] and len(data) >= 4:
+                        result["daily"][-1]["times"].append({
+                            "when": when, "weather": data[0],
+                            "wind_dir": data[1], "wind_speed": data[2], "wave": data[3],
+                        })
+
+    # Table 3: extended forecast (5-day)
+    if len(tables) > 3:
+        trs = tables[3].find_all("tr")
         for tr in trs:
             tds = tr.find_all(["td", "th"])
-            text = " | ".join(td.get_text(strip=True) for td in tds if td.get_text(strip=True))
-            if text and len(text) > 5:
-                forecasts.append(text)
-    return forecasts[:20]
+            texts = [td.get_text(strip=True) for td in tds]
+            if texts and texts[0] in ("날씨", "파고", "풍향", "풍속"):
+                result["extended"].append(texts)
+
+    # Table 4: hourly labels (the data is JS-loaded)
+    if len(tables) > 4:
+        trs = tables[4].find_all("tr")
+        for tr in trs:
+            tds = tr.find_all(["td", "th"])
+            texts = [td.get_text(strip=True) for td in tds]
+            if texts:
+                key = texts[0]
+                if key and len(texts) > 1:
+                    result["hourly_labels"].append(key)
+
+    return result
 
 
 def parse_sea_temp(soup):
@@ -155,7 +198,7 @@ def main():
         "location_id": LOCATION_ID,
         "updated": now_kst.isoformat(),
         "sea_temp": sea_temp,
-        "sea_weather": sea_weather[:10],
+        "sea_weather": sea_weather,
         "tides": tides,
     }
 
@@ -163,7 +206,8 @@ def main():
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     today = now_kst.strftime("%m/%d")
-    print(f"Done! {len(tides)} days, sea temp={sea_temp}°C, updated={today}")
+    n_daily = len(sea_weather.get("daily", [])) if isinstance(sea_weather, dict) else 0
+    print(f"Done! {len(tides)} days, sea temp={sea_temp}°C, weather={n_daily} days, updated={today}")
     for t in tides[:3]:
         mj = " ".join(f'{x["time"]}({x["height"]})' for x in t.get("manjo", []))
         print(f"  {t['month']}/{t['day']}({t['dow']}) lunar={t['lunar']} | {t['tide_class']} | flow={t['flow_pct']}% | manjo={mj}")
