@@ -259,10 +259,13 @@ function wIcon(c){
     if(c.includes('흐림'))return'☁️';
     return'🌤️';
 }
-function renderWeather(sw){
+function renderWeather(sw,tm,td){
     swData=sw||{};
+    // Match selected date: "6.14(일)" format
+    const target=`${tm}.${td}(`;
     let h='';
-    (sw.daily||[]).slice(0,3).forEach(day=>{
+    (sw.daily||[]).forEach(day=>{
+        if(!day.date.startsWith(target))return;
         h+=`<div class="wxday"><div class="wxd">📅 ${day.date}</div>`;
         (day.times||[]).forEach(t=>{
             h+=`<div class="wxrow">
@@ -274,6 +277,7 @@ function renderWeather(sw){
         });
         h+='</div>';
     });
+    if(!h)h='<div style="color:#94a3b8;font-size:0.75rem">이날 날씨정보 없음</div>';
     document.getElementById('wxDaily').innerHTML=h;
     let e='';
     (sw.extended||[]).forEach(row=>{
@@ -295,6 +299,7 @@ function selectDay(m,d){
         '만조 '+(td.manjo||[]).map(x=>x.time).join(', ')+' · 간조 '+(td.ganjo||[]).map(x=>x.time).join(', ');
     renderGraph(td);
     renderDetail(td);
+    renderWeather(swData,m,d);
     // Chips
     let chips='';
     for(let i=0;i<10;i++){
@@ -315,7 +320,8 @@ async function load(){
         tideData=data.tides||[];
         document.getElementById('temp').innerHTML=(data.sea_temp||'--')+'<u>°C</u>';
         document.getElementById('utime').textContent='갱신: '+(data.updated||'').replace('T',' ').slice(5,16);
-        renderWeather(data.sea_weather||{});
+        const sw=data.sea_weather||{};
+        swData=sw;
         const m=today.getMonth()+1,d=today.getDate();
         selectDay(m,d);
     }catch(e){}
