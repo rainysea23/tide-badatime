@@ -3,7 +3,7 @@ import requests, json, re, sys, os
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 
-LOCATION_ID = 1442
+LOCATION_ID = 1443
 URL = f"https://www.badatime.com/{LOCATION_ID}/tide"
 KST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tide_data.json")
@@ -194,7 +194,7 @@ def main():
 
     now_kst = datetime.now(KST)
     data = {
-        "location": "대길산도",
+        "location": "내파수도",
         "location_id": LOCATION_ID,
         "updated": now_kst.isoformat(),
         "sea_temp": sea_temp,
