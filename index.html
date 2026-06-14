@@ -162,49 +162,51 @@ let selected = null;
 // ═══════════════════════════════════════════
 // Tide graph (cosine interpolation)
 // ═══════════════════════════════════════════
+function toMin(t) { const [h,m]=t.split(':').map(Number); return h*60+m; }
+
 function buildGraph(td) {
     if (!td) return {labels:[], values:[], hts:[], lts:[]};
 
     const events = [];
     (td.manjo||[]).forEach(e => events.push({...e, type:'H'}));
     (td.ganjo||[]).forEach(e => events.push({...e, type:'L'}));
-    events.sort((a,b) => {
-        const [ah,am]=a.time.split(':').map(Number);
-        const [bh,bm]=b.time.split(':').map(Number);
-        return (ah*60+am)-(bh*60+bm);
-    });
+    events.sort((a,b) => toMin(a.time)-toMin(b.time));
     if (events.length < 2) return {labels:[], values:[], hts:[], lts:[]};
+
+    // Build extended events spanning 3 days (yesterday-today-tomorrow)
+    // So every 15-min point has proper prev/next neighbors
+    const ext = [];
+    events.forEach(e => {
+        ext.push({...e, absMin: toMin(e.time) - 1440}); // yesterday
+        ext.push({...e, absMin: toMin(e.time)});         // today
+        ext.push({...e, absMin: toMin(e.time) + 1440}); // tomorrow
+    });
 
     const labels=[], values=[];
     const hts=[], lts=[];
-    for (let h=0;h<24;h++) for (let m=0;m<60;m+=15) {
-        const min=h*60+m;
-        const label=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    for (let h=0; h<24; h++) for (let m=0; m<60; m+=15) {
+        const min = h*60+m;
+        const label = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
         labels.push(label);
 
-        let prev=events[events.length-1], next=events[0];
-        for(const e of events) {
-            const [eh,em]=e.time.split(':').map(Number);
-            if(eh*60+em <= min) prev=e;
-            if(eh*60+em > min) { next=e; break; }
+        // Find prev (largest absMin <= min) and next (smallest absMin > min)
+        let prev=ext[0], next=ext[ext.length-1];
+        for(const e of ext) {
+            if(e.absMin <= min) prev=e;
+            if(e.absMin > min) { next=e; break; }
         }
-        let [ph,pm]=prev.time.split(':').map(Number), pmin=ph*60+pm;
-        let [nh,nm]=next.time.split(':').map(Number), nmin=nh*60+nm;
-        if(nmin<pmin) nmin+=1440;
-        const frac=(min-pmin)/(nmin-pmin);
-        const cosFrac=(1-Math.cos(frac*Math.PI))/2;
-        values.push(Math.round(prev.height+(next.height-prev.height)*cosFrac));
+
+        const frac = (min - prev.absMin) / (next.absMin - prev.absMin);
+        const cosFrac = (1 - Math.cos(frac * Math.PI)) / 2;
+        values.push(Math.round(prev.height + (next.height - prev.height) * cosFrac));
     }
 
     events.forEach(e => {
-        const [h,m]=e.time.split(':').map(Number);
-        const label=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-        const idx=labels.indexOf(label);
-        if(e.type==='H') hts.push({idx,height:e.height});
-        else lts.push({idx,height:e.height});
+        const idx = labels.indexOf(e.time);
+        if(idx>=0) (e.type==='H'?hts:lts).push({idx, height:e.height});
     });
 
-    return {labels,values,hts,lts};
+    return {labels, values, hts, lts};
 }
 
 function renderGraph(td) {
@@ -245,16 +247,30 @@ function renderGraph(td) {
                     c.ctx.fillStyle='#f97316'; c.ctx.textAlign='center';
                     c.ctx.fillText('▼'+height,x,y+18);
                 });
-                // Current time line
+                // Current time indicator
                 const now=new Date();
                 if(td.month===now.getMonth()+1 && td.day===now.getDate()){
-                    const curLabel=`${String(now.getHours()).padStart(2,'0')}:30`;
-                    const idx=g.labels.indexOf(curLabel);
-                    if(idx>=0){
-                        const x=xa.getPixelForValue(idx);
-                        c.ctx.beginPath(); c.ctx.moveTo(x,ya.top); c.ctx.lineTo(x,ya.bottom);
-                        c.ctx.strokeStyle='rgba(255,255,255,0.3)'; c.ctx.setLineDash([3,3]);
-                        c.ctx.lineWidth=1; c.ctx.stroke(); c.ctx.setLineDash([]);
+                    const curHM = now.getHours()*60 + now.getMinutes();
+                    // Find current height from the graph data
+                    const curIdx = Math.round(curHM / 15);
+                    if(curIdx>=0 && curIdx<g.values.length){
+                        const curX = xa.getPixelForValue(curIdx);
+                        const curY = ya.getPixelForValue(g.values[curIdx]);
+                        // Vertical dashed line
+                        c.ctx.beginPath(); c.ctx.moveTo(curX, ya.top);
+                        c.ctx.lineTo(curX, ya.bottom);
+                        c.ctx.strokeStyle='rgba(255,255,255,0.4)'; c.ctx.setLineDash([3,4]);
+                        c.ctx.lineWidth=1.5; c.ctx.stroke(); c.ctx.setLineDash([]);
+                        // Current position dot
+                        c.ctx.beginPath(); c.ctx.arc(curX, curY, 5, 0, Math.PI*2);
+                        c.ctx.fillStyle='#fff'; c.ctx.fill();
+                        c.ctx.beginPath(); c.ctx.arc(curX, curY, 3, 0, Math.PI*2);
+                        c.ctx.fillStyle='#f97316'; c.ctx.fill();
+                        // Label
+                        c.ctx.font='bold 9px sans-serif';
+                        c.ctx.fillStyle='#fff';
+                        c.ctx.textAlign='left';
+                        c.ctx.fillText('현재 '+g.values[curIdx]+'cm', curX+8, curY-4);
                     }
                 }
             }

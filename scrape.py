@@ -67,12 +67,12 @@ def parse_tide_table(soup):
 
             # Manjo: "02:13 (628) ▲+555 14:17 (535) ▲+388"
             manjo_text = manjo_cell.get_text(" ", strip=True).replace("\xa0", " ") if manjo_cell else ""
-            manjo_times = re.findall(r'(\d{2}:\d{2})\s*\((\d+)\)\s*▲([+-]?\d+)', manjo_text)
+            manjo_times = re.findall(r'(\d{2}:\d{2})\s*\(\s*(\d+)\s*\)\s*▲([+-]?\d+)', manjo_text)
             manjo = [{"time": t, "height": int(h), "diff": int(d)} for t, h, d in manjo_times]
 
-            # Ganjo: "09:02 (147) ▼-481 20:58 ( 49) ▼-486"
+            # Ganjo: "09:02 (147) ▼-481 20:58 ( 49) ▼-486" (NBSP issue)
             ganjo_text = ganjo_cell.get_text(" ", strip=True).replace("\xa0", " ") if ganjo_cell else ""
-            ganjo_times = re.findall(r'(\d{2}:\d{2})\s*\((\d+)\)\s*▼([+-]?\d+)', ganjo_text)
+            ganjo_times = re.findall(r'(\d{2}:\d{2})\s*\(\s*(\d+)\s*\)\s*▼([+-]?\d+)', ganjo_text)
             ganjo = [{"time": t, "height": int(h), "diff": int(d)} for t, h, d in ganjo_times]
 
             # Sunrise/sunset
