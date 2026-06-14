@@ -1,0 +1,520 @@
+{
+  "location": "대길산도",
+  "location_id": 1442,
+  "updated": "2026-06-14T11:29:19.470258+09:00",
+  "sea_temp": 20.9,
+  "sea_weather": [
+    "충남남부앞바다",
+    "일자 | 날씨 | 풍향 | 풍속 | 파고",
+    "6.14(일) | 오전 | 구름많음 | 남동-남 | 3-6 | 0.5-1.0",
+    "오후 | 구름많고소나기 | 북-북동 | 3-6 | 0.5-0.5",
+    "6.15(월) | 오전 | 구름많음 | 동-남동 | 3-6 | 0.5-0.5",
+    "오후 | 맑음 | 서-북서 | 3-6 | 0.5-0.5",
+    "6.16(화) | 오전 | 맑음 | 남동-남 | 3-6 | 0.5-0.5",
+    "오후 | 맑음 | 서-북서 | 3-6 | 0.5-0.5",
+    "6.17 (수) | 6.18 (목) | 6.19 (금) | 6.20 (토) | 6.21 (일)",
+    "날씨 | 흐린후갬 | 구름많음 | 구름많음 | 구름많음 | 구름많음"
+  ],
+  "tides": [
+    {
+      "day": 14,
+      "dow": "일",
+      "lunar": "4.29",
+      "tide_class": "5",
+      "flow_pct": 78,
+      "manjo": [
+        {
+          "time": "02:13",
+          "height": 628,
+          "diff": 555
+        },
+        {
+          "time": "14:17",
+          "height": 535,
+          "diff": 388
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "09:02",
+          "height": 147,
+          "diff": -481
+        }
+      ],
+      "sunrise_set": "05:1719:54",
+      "moonrise_set": "03:4719:18",
+      "moon_img": 29,
+      "weather_img": "//images.badatime.com/weather/3.png",
+      "month": 6
+    },
+    {
+      "day": 15,
+      "dow": "월",
+      "lunar": "5.1",
+      "tide_class": "7",
+      "flow_pct": 93,
+      "manjo": [
+        {
+          "time": "03:05",
+          "height": 658,
+          "diff": 611
+        },
+        {
+          "time": "15:09",
+          "height": 544,
+          "diff": 413
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "09:55",
+          "height": 131,
+          "diff": -527
+        }
+      ],
+      "sunrise_set": "05:1719:54",
+      "moonrise_set": "04:4520:28",
+      "moon_img": 1,
+      "weather_img": "//images.badatime.com/weather/3.png",
+      "month": 6
+    },
+    {
+      "day": 16,
+      "dow": "화",
+      "lunar": "5.2",
+      "tide_class": "8",
+      "flow_pct": null,
+      "manjo": [
+        {
+          "time": "03:57",
+          "height": 674,
+          "diff": 644
+        },
+        {
+          "time": "16:01",
+          "height": 549,
+          "diff": 428
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "10:46",
+          "height": 121,
+          "diff": -553
+        }
+      ],
+      "sunrise_set": "05:1719:55",
+      "moonrise_set": "05:5421:28",
+      "moon_img": 2,
+      "weather_img": "//images.badatime.com/weather/1.png",
+      "month": 6
+    },
+    {
+      "day": 17,
+      "dow": "수",
+      "lunar": "5.3",
+      "tide_class": "9",
+      "flow_pct": 99,
+      "manjo": [
+        {
+          "time": "04:48",
+          "height": 677,
+          "diff": 653
+        },
+        {
+          "time": "16:53",
+          "height": 551,
+          "diff": 433
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "11:36",
+          "height": 118,
+          "diff": -559
+        }
+      ],
+      "sunrise_set": "05:1819:55",
+      "moonrise_set": "07:1022:16",
+      "moon_img": 3,
+      "weather_img": "//images.badatime.com/weather/5.png",
+      "month": 6
+    },
+    {
+      "day": 18,
+      "dow": "목",
+      "lunar": "5.4",
+      "tide_class": "10",
+      "flow_pct": 92,
+      "manjo": [
+        {
+          "time": "05:38",
+          "height": 667,
+          "diff": 639
+        },
+        {
+          "time": "17:44",
+          "height": 548,
+          "diff": 427
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "12:24",
+          "height": 121,
+          "diff": -546
+        }
+      ],
+      "sunrise_set": "05:1819:55",
+      "moonrise_set": "08:2622:55",
+      "moon_img": 4,
+      "weather_img": "//images.badatime.com/weather/3.png",
+      "month": 6
+    },
+    {
+      "day": 19,
+      "dow": "금",
+      "lunar": "5.5",
+      "tide_class": "11",
+      "flow_pct": 85,
+      "manjo": [
+        {
+          "time": "06:27",
+          "height": 646,
+          "diff": 600
+        },
+        {
+          "time": "18:34",
+          "height": 541,
+          "diff": 412
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "13:10",
+          "height": 129,
+          "diff": -517
+        }
+      ],
+      "sunrise_set": "05:1819:56",
+      "moonrise_set": "09:4023:26",
+      "moon_img": 5,
+      "weather_img": "//images.badatime.com/weather/3.png",
+      "month": 6
+    },
+    {
+      "day": 20,
+      "dow": "토",
+      "lunar": "5.6",
+      "tide_class": "12",
+      "flow_pct": 67,
+      "manjo": [
+        {
+          "time": "07:13",
+          "height": 616,
+          "diff": 543
+        },
+        {
+          "time": "19:26",
+          "height": 529,
+          "diff": 389
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "13:55",
+          "height": 140,
+          "diff": -476
+        }
+      ],
+      "sunrise_set": "05:1819:56",
+      "moonrise_set": "10:4823:54",
+      "moon_img": 6,
+      "weather_img": "//images.badatime.com/weather/3.png",
+      "month": 6
+    },
+    {
+      "day": 21,
+      "dow": "일",
+      "lunar": "5.7",
+      "tide_class": "13",
+      "flow_pct": 45,
+      "manjo": [
+        {
+          "time": "07:59",
+          "height": 581,
+          "diff": 472
+        },
+        {
+          "time": "20:20",
+          "height": 513,
+          "diff": 361
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "01:55",
+          "height": 109,
+          "diff": -433
+        },
+        {
+          "time": "14:42",
+          "height": 152,
+          "diff": -429
+        }
+      ],
+      "sunrise_set": "05:1819:56",
+      "moonrise_set": "11:53----",
+      "moon_img": 7,
+      "weather_img": "//images.badatime.com/weather/3.png",
+      "month": 6
+    },
+    {
+      "day": 22,
+      "dow": "월",
+      "lunar": "5.8",
+      "tide_class": "조금",
+      "flow_pct": 20,
+      "manjo": [
+        {
+          "time": "08:47",
+          "height": 543,
+          "diff": 392
+        },
+        {
+          "time": "21:20",
+          "height": 499,
+          "diff": 335
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "02:46",
+          "height": 151,
+          "diff": -375
+        },
+        {
+          "time": "15:31",
+          "height": 164,
+          "diff": -379
+        }
+      ],
+      "sunrise_set": "05:1819:56",
+      "moonrise_set": "12:5500:18",
+      "moon_img": 8,
+      "weather_img": "",
+      "month": 6
+    },
+    {
+      "day": 23,
+      "dow": "화",
+      "lunar": "5.9",
+      "tide_class": "무시",
+      "flow_pct": 3,
+      "manjo": [
+        {
+          "time": "09:40",
+          "height": 507,
+          "diff": 313
+        },
+        {
+          "time": "22:30",
+          "height": 492,
+          "diff": 320
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "03:45",
+          "height": 194,
+          "diff": -317
+        },
+        {
+          "time": "16:25",
+          "height": 172,
+          "diff": -335
+        }
+      ],
+      "sunrise_set": "05:1919:56",
+      "moonrise_set": "13:5600:42",
+      "moon_img": 9,
+      "weather_img": "",
+      "month": 6
+    },
+    {
+      "day": 24,
+      "dow": "수",
+      "lunar": "5.10",
+      "tide_class": "1",
+      "flow_pct": null,
+      "manjo": [
+        {
+          "time": "10:40",
+          "height": 480,
+          "diff": 252
+        },
+        {
+          "time": "23:44",
+          "height": 499,
+          "diff": 325
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "04:54",
+          "height": 228,
+          "diff": -276
+        },
+        {
+          "time": "17:24",
+          "height": 174,
+          "diff": -306
+        }
+      ],
+      "sunrise_set": "05:1919:57",
+      "moonrise_set": "14:5601:07",
+      "moon_img": 10,
+      "weather_img": "",
+      "month": 6
+    },
+    {
+      "day": 25,
+      "dow": "목",
+      "lunar": "5.11",
+      "tide_class": "2",
+      "flow_pct": 8,
+      "manjo": [
+        {
+          "time": "11:46",
+          "height": 465,
+          "diff": 223
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "06:13",
+          "height": 242,
+          "diff": -269
+        },
+        {
+          "time": "18:25",
+          "height": 168,
+          "diff": -297
+        }
+      ],
+      "sunrise_set": "05:1919:57",
+      "moonrise_set": "15:5701:34",
+      "moon_img": 11,
+      "weather_img": "",
+      "month": 6
+    },
+    {
+      "day": 26,
+      "dow": "금",
+      "lunar": "5.12",
+      "tide_class": "3",
+      "flow_pct": 11,
+      "manjo": [
+        {
+          "time": "00:52",
+          "height": 519,
+          "diff": 350
+        },
+        {
+          "time": "12:48",
+          "height": 464,
+          "diff": 226
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "07:25",
+          "height": 238,
+          "diff": -281
+        },
+        {
+          "time": "19:21",
+          "height": 156,
+          "diff": -308
+        }
+      ],
+      "sunrise_set": "05:1919:57",
+      "moonrise_set": "16:5702:04",
+      "moon_img": 12,
+      "weather_img": "",
+      "month": 6
+    },
+    {
+      "day": 27,
+      "dow": "토",
+      "lunar": "5.13",
+      "tide_class": "4",
+      "flow_pct": 23,
+      "manjo": [
+        {
+          "time": "01:48",
+          "height": 544,
+          "diff": 387
+        },
+        {
+          "time": "13:42",
+          "height": 471,
+          "diff": 248
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "08:23",
+          "height": 223,
+          "diff": -321
+        },
+        {
+          "time": "20:09",
+          "height": 143,
+          "diff": -328
+        }
+      ],
+      "sunrise_set": "05:2019:57",
+      "moonrise_set": "17:5702:39",
+      "moon_img": 13,
+      "weather_img": "",
+      "month": 6
+    },
+    {
+      "day": 28,
+      "dow": "일",
+      "lunar": "5.14",
+      "tide_class": "5",
+      "flow_pct": 35,
+      "manjo": [
+        {
+          "time": "02:34",
+          "height": 568,
+          "diff": 425
+        },
+        {
+          "time": "14:28",
+          "height": 484,
+          "diff": 276
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "09:09",
+          "height": 208,
+          "diff": -360
+        },
+        {
+          "time": "20:50",
+          "height": 130,
+          "diff": -354
+        }
+      ],
+      "sunrise_set": "05:2019:57",
+      "moonrise_set": "18:5303:20",
+      "moon_img": 14,
+      "weather_img": "",
+      "month": 6
+    }
+  ]
+}
