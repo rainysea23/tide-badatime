@@ -173,14 +173,14 @@ function buildGraph(td) {
     events.sort((a,b) => toMin(a.time)-toMin(b.time));
     if (events.length < 2) return {labels:[], values:[], hts:[], lts:[]};
 
-    // Build extended events spanning 3 days (yesterday-today-tomorrow)
-    // So every 15-min point has proper prev/next neighbors
+    // Build extended events spanning 3 days, sorted by absolute minute
     const ext = [];
     events.forEach(e => {
         ext.push({...e, absMin: toMin(e.time) - 1440}); // yesterday
         ext.push({...e, absMin: toMin(e.time)});         // today
         ext.push({...e, absMin: toMin(e.time) + 1440}); // tomorrow
     });
+    ext.sort((a,b) => a.absMin - b.absMin);
 
     const labels=[], values=[];
     const hts=[], lts=[];
