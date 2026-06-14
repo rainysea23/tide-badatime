@@ -8,414 +8,301 @@
 <title>내파수도 물때</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-    font-family: -apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
-    background: #f5f5f5; color: #333;
-    min-height: 100dvh;
-    -webkit-tap-highlight-color: transparent;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+    background:#f5f5f5;color:#333;min-height:100dvh;
+    -webkit-tap-highlight-color:transparent;
 }
 
-/* ── Dark top section ── */
-.dark-section {
-    background: linear-gradient(180deg, #0f172a 0%, #1a2332 100%);
-    padding: 16px 16px 24px;
-    color: #e2e8f0;
-    position: sticky; top: 0; z-index: 10;
+/* ── Dark top ── */
+.dark{
+    background:linear-gradient(180deg,#0f172a 0%,#1a2332 100%);
+    padding:16px 16px 20px;color:#e2e8f0;
 }
-.top-row {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 4px;
-}
-.top-row .loc { font-size: 1.05rem; font-weight: 700; }
-.top-row .date { font-size: 0.8rem; color: #94a3b8; }
-.info-row {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
-    font-size: 0.78rem; color: #94a3b8;
-}
-.info-row .temp { font-size: 2rem; font-weight: 700; color: #f97316; }
-.info-row .temp .unit { font-size: 1rem; color: #94a3b8; }
-.info-row .tide-info { line-height: 1.4; }
-.info-row .tide-info .tclass { font-weight: 700; color: #38bdf8; }
+.dark .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.dark .top .loc{font-size:1.05rem;font-weight:700}
+.dark .top .date{font-size:0.8rem;color:#94a3b8}
+.dark .info{display:flex;align-items:center;gap:14px;margin-bottom:8px;font-size:0.78rem;color:#94a3b8}
+.dark .info .temp{font-size:2rem;font-weight:700;color:#f97316}
+.dark .info .temp u{font-size:1rem;color:#94a3b8;text-decoration:none}
+.dark .info .tide b{font-weight:700;color:#38bdf8}
 
-/* ── Graph in dark section ── */
-.graph-wrap { height: 180px; margin: 8px 0 0; position: relative; }
-#tideChart { width: 100%; height: 100%; }
+/* ── Graph ── */
+.graph-wrap{height:170px;margin-top:4px}
+#tideChart{width:100%;height:100%}
 
-/* ── Date chips ── */
-.chips {
-    background: #fff; border-bottom: 1px solid #e5e5e5;
-    padding: 10px 16px; display: flex; gap: 6px; overflow-x: auto;
-    position: sticky; top: 252px; z-index: 9;
-    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+/* ── Chips ── */
+.chips{
+    background:#fff;border-bottom:1px solid #e5e5e5;
+    padding:8px 14px;display:flex;gap:6px;overflow-x:auto;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
-.chips::-webkit-scrollbar { display: none; }
-.chip {
-    flex-shrink: 0; background: #f0f0f0; border: none;
-    border-radius: 20px; padding: 7px 14px; font-size: 0.75rem;
-    color: #666; cursor: pointer; white-space: nowrap;
-    transition: all 0.15s; -webkit-tap-highlight-color: transparent;
+.chips::-webkit-scrollbar{display:none}
+.chip{
+    flex-shrink:0;background:#f0f0f0;border:none;
+    border-radius:20px;padding:6px 14px;font-size:0.74rem;
+    color:#666;cursor:pointer;white-space:nowrap;
+    transition:all 0.15s;-webkit-tap-highlight-color:transparent;
 }
-.chip.selected { background: #0f172a; color: #fff; font-weight: 700; }
+.chip.sel{background:#0f172a;color:#fff;font-weight:700}
 
-/* ── Tide rows (light section) ── */
-.tide-list { max-width: 640px; margin: 0 auto; padding: 8px 12px 60px; }
-.tide-row {
-    display: flex; align-items: center; gap: 10px;
-    padding: 14px 12px; background: #fff; border-radius: 10px;
-    margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    transition: all 0.15s;
+/* ── Tide detail card ── */
+.detail{
+    max-width:640px;margin:8px auto;padding:0 12px;
 }
-.tide-row.today { border: 1.5px solid #38bdf8; box-shadow: 0 2px 8px rgba(56,189,248,0.1); }
-
-/* Date column */
-.row-date { width: 50px; text-align: center; flex-shrink: 0; }
-.row-date .day { font-size: 1.05rem; font-weight: 700; line-height: 1.2; }
-.row-date .dow { font-size: 0.65rem; }
-.row-date .sat { color: #3b82f6; } .row-date .sun { color: #ef4444; }
-.row-date .lunar { font-size: 0.6rem; color: #999; display: block; }
-
-/* Tide class column */
-.row-tide { width: 44px; text-align: center; flex-shrink: 0; }
-.tide-badge {
-    display: inline-block; padding: 3px 7px; border-radius: 10px;
-    font-size: 0.7rem; font-weight: 700; white-space: nowrap;
+.detail .card{
+    background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.04);
+    border:1.5px solid #38bdf8;
 }
-.tide-badge.high { background: #e8f4fd; color: #0284c7; }
-.tide-badge.mid { background: #dcfce7; color: #15803d; }
-.tide-badge.low { background: #fef3c7; color: #a16207; }
-.tide-badge.neutral { background: #f0f0f0; color: #888; }
-
-/* Tide times column - main content */
-.row-times { flex: 1; min-width: 0; }
-.time-line {
-    display: flex; align-items: baseline; gap: 4px;
-    font-size: 0.85rem; padding: 1px 0; font-family: 'SF Mono','Consolas',monospace;
+.detail .card .dtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.detail .card .dlabel{font-size:0.85rem;font-weight:700}
+.detail .card .dbadge{
+    padding:3px 10px;border-radius:10px;font-size:0.72rem;font-weight:700;
+    background:#e8f4fd;color:#0284c7;
 }
-.time-line .t { font-weight: 700; }
-.time-line .h { font-size: 0.72rem; color: #888; }
-.time-line .diff { font-size: 0.62rem; margin-left: 2px; }
-.time-line .diff.up { color: #16a34a; }
-.time-line .diff.down { color: #dc2626; }
-.time-line.manjo { color: #2563eb; }
-.time-line.ganjo { color: #ea580c; }
-
-/* Weather icon */
-.row-wx { width: 28px; flex-shrink: 0; text-align: center; font-size: 0.65rem; color: #999; }
-
-/* ── Weather card ── */
-.wx-card {
-    max-width: 640px; margin: 8px auto; padding: 0 12px;
+.detail .tides{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.detail .tide-g .tlabel{font-size:0.7rem;font-weight:700;margin-bottom:4px}
+.detail .tide-g .tlabel.hi{color:#2563eb}
+.detail .tide-g .tlabel.lo{color:#ea580c}
+.detail .tide-item{
+    display:flex;align-items:baseline;gap:6px;padding:3px 0;
+    font-family:'SF Mono',Consolas,monospace;font-size:0.95rem;
 }
-.wx-inner {
-    background: #fff; border-radius: 10px; padding: 14px 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-.wx-inner h3 { font-size: 0.82rem; color: #333; margin-bottom: 10px; }
-.wx-day { margin-bottom: 12px; }
-.wx-day .wx-date { font-size: 0.75rem; font-weight: 700; color: #333; margin-bottom: 6px; }
-.wx-row {
-    display: flex; align-items: center; gap: 10px; padding: 6px 8px;
-    background: #f8fafc; border-radius: 8px; margin-bottom: 4px;
-    font-size: 0.73rem;
-}
-.wx-row .wx-when { font-weight: 700; color: #64748b; min-width: 28px; }
-.wx-row .wx-wicon { font-size: 1.2rem; min-width: 24px; text-align: center; }
-.wx-row .wx-cond { font-weight: 600; color: #334155; min-width: 80px; }
-.wx-row .wx-wind { color: #3b82f6; min-width: 90px; }
-.wx-row .wx-wave { color: #06b6d4; }
-.wx-ext { font-size: 0.7rem; color: #94a3b8; line-height: 1.6; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e5e5; }
-.wx-ext b { color: #64748b; }
+.detail .tide-item .ti{font-weight:700}
+.detail .tide-item .th{font-size:0.75rem;color:#888}
+.detail .tide-item .tdiff{font-size:0.65rem;padding:1px 4px;border-radius:3px}
+.detail .tide-item .tdiff.up{background:#dcfce7;color:#16a34a}
+.detail .tide-item .tdiff.down{background:#fef2f2;color:#dc2626}
+.detail .sunmoon{display:flex;gap:16px;margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f0;font-size:0.7rem;color:#888}
 
-/* ── Footer ── */
-.ft { text-align: center; padding: 12px; font-size: 0.62rem; color: #bbb; }
-.ft a { color: #94a3b8; }
+/* ── Weather ── */
+.wx{
+    max-width:640px;margin:8px auto 60px;padding:0 12px;
+}
+.wx .wxcard{
+    background:#fff;border-radius:12px;padding:14px 16px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:8px;
+}
+.wx .wxcard h4{font-size:0.82rem;color:#333;margin-bottom:10px}
+.wx .wxday{margin-bottom:10px}
+.wx .wxday .wxd{font-size:0.75rem;font-weight:700;color:#333;margin-bottom:5px}
+.wx .wxrow{
+    display:flex;align-items:center;gap:8px;padding:5px 8px;
+    background:#f8fafc;border-radius:8px;margin-bottom:3px;font-size:0.72rem;
+}
+.wx .wxrow .ww{font-weight:700;color:#64748b;min-width:26px}
+.wx .wxrow .wi{font-size:1.1rem;min-width:22px;text-align:center}
+.wx .wxrow .wc{font-weight:600;color:#334155;min-width:75px}
+.wx .wxrow .wd{color:#3b82f6;min-width:85px}
+.wx .wxrow .wv{color:#06b6d4}
+.wx .wxext{font-size:0.68rem;color:#94a3b8;line-height:1.6;margin-top:6px;padding-top:6px;border-top:1px solid #f0f0f0}
+.wx .wxext b{color:#64748b}
+
+.ft{text-align:center;padding:12px;font-size:0.62rem;color:#bbb}
+.ft a{color:#94a3b8}
 </style>
 </head>
 <body>
 
-<!-- Dark top -->
-<div class="dark-section" id="darkSection">
-    <div class="top-row">
-        <span class="loc">⚓ 내파수도</span>
-        <span class="date" id="headerDate"></span>
-    </div>
-    <div class="info-row">
-        <div class="temp" id="seaTemp">--<span class="unit">°C</span></div>
-        <div class="tide-info">
-            <div>오늘 물때 <span class="tclass" id="tideClass">-</span></div>
-            <div id="tideSummary"></div>
-        </div>
+<div class="dark">
+    <div class="top"><span class="loc">⚓ 내파수도</span><span class="date" id="hd"></span></div>
+    <div class="info">
+        <div class="temp" id="temp">--<u>°C</u></div>
+        <div>오늘 물때 <b id="tcls">-</b><br><span id="tsum"></span></div>
     </div>
     <div class="graph-wrap"><canvas id="tideChart"></canvas></div>
 </div>
 
-<!-- Date chips -->
 <div class="chips" id="chips"></div>
 
-<!-- Tide list -->
-<div class="tide-list" id="tideList"></div>
+<div class="detail"><div class="card" id="detailCard"></div></div>
 
-<div class="wx-card"><div class="wx-inner" id="wxContent">
-    <h3>🌊 바다날씨</h3>
-    <div id="wxDaily"></div>
-    <div id="wxExtended" style="margin-top:10px;"></div>
-</div></div>
+<div class="wx">
+    <div class="wxcard"><h4>🌊 바다날씨</h4><div id="wxDaily"></div><div id="wxExtended"></div></div>
+</div>
 
-<div class="ft">Data: <a href="https://www.badatime.com/1443/tide">바다타임</a> · 3시간마다 갱신 · <span id="updateTime"></span></div>
+<div class="ft">Data: <a href="https://www.badatime.com/1443/tide">바다타임</a> · 3h 갱신 · <span id="utime"></span></div>
 
 <script>
 // ═══════════════════════════════════════════
-// State
-// ═══════════════════════════════════════════
-const today = new Date();
-let tideData = [];
-let chart = null;
-let selected = null;
+const today=new Date();
+let tideData=[],chart=null,selected=null,swData={};
+
+function toMin(t){const[h,m]=t.split(':').map(Number);return h*60+m}
 
 // ═══════════════════════════════════════════
-// Tide graph (cosine interpolation)
+// Graph
 // ═══════════════════════════════════════════
-function toMin(t) { const [h,m]=t.split(':').map(Number); return h*60+m; }
+function buildGraph(td){
+    if(!td)return{labels:[],values:[],hts:[],lts:[]};
+    const events=[];
+    (td.manjo||[]).forEach(e=>events.push({...e,type:'H'}));
+    (td.ganjo||[]).forEach(e=>events.push({...e,type:'L'}));
+    events.sort((a,b)=>toMin(a.time)-toMin(b.time));
+    if(events.length<2)return{labels:[],values:[],hts:[],lts:[]};
 
-function buildGraph(td) {
-    if (!td) return {labels:[], values:[], hts:[], lts:[]};
-
-    const events = [];
-    (td.manjo||[]).forEach(e => events.push({...e, type:'H'}));
-    (td.ganjo||[]).forEach(e => events.push({...e, type:'L'}));
-    events.sort((a,b) => toMin(a.time)-toMin(b.time));
-    if (events.length < 2) return {labels:[], values:[], hts:[], lts:[]};
-
-    // Build extended events spanning 3 days, sorted by absolute minute
-    const ext = [];
-    events.forEach(e => {
-        ext.push({...e, absMin: toMin(e.time) - 1440}); // yesterday
-        ext.push({...e, absMin: toMin(e.time)});         // today
-        ext.push({...e, absMin: toMin(e.time) + 1440}); // tomorrow
+    const ext=[];
+    events.forEach(e=>{
+        ext.push({...e,absMin:toMin(e.time)-1440});
+        ext.push({...e,absMin:toMin(e.time)});
+        ext.push({...e,absMin:toMin(e.time)+1440});
     });
-    ext.sort((a,b) => a.absMin - b.absMin);
+    ext.sort((a,b)=>a.absMin-b.absMin);
 
-    const labels=[], values=[];
-    const hts=[], lts=[];
-    for (let h=0; h<24; h++) for (let m=0; m<60; m+=15) {
-        const min = h*60+m;
-        const label = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-        labels.push(label);
-
-        // Find prev (largest absMin <= min) and next (smallest absMin > min)
-        let prev=ext[0], next=ext[ext.length-1];
-        for(const e of ext) {
-            if(e.absMin <= min) prev=e;
-            if(e.absMin > min) { next=e; break; }
-        }
-
-        const frac = (min - prev.absMin) / (next.absMin - prev.absMin);
-        const cosFrac = (1 - Math.cos(frac * Math.PI)) / 2;
-        values.push(Math.round(prev.height + (next.height - prev.height) * cosFrac));
+    const labels=[],values=[],hts=[],lts=[];
+    for(let h=0;h<24;h++)for(let m=0;m<60;m+=15){
+        const min=h*60+m;
+        labels.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+        let p=ext[0],n=ext[ext.length-1];
+        for(const e of ext){if(e.absMin<=min)p=e;if(e.absMin>min){n=e;break}}
+        const f=(min-p.absMin)/(n.absMin-p.absMin);
+        const cf=(1-Math.cos(f*Math.PI))/2;
+        values.push(Math.round(p.height+(n.height-p.height)*cf));
     }
-
-    events.forEach(e => {
-        const idx = labels.indexOf(e.time);
-        if(idx>=0) (e.type==='H'?hts:lts).push({idx, height:e.height});
+    events.forEach(e=>{
+        const idx=labels.indexOf(e.time);
+        if(idx>=0)(e.type==='H'?hts:lts).push({idx,height:e.height});
     });
-
-    return {labels, values, hts, lts};
+    return{labels,values,hts,lts};
 }
 
-function renderGraph(td) {
-    if(chart) chart.destroy();
+function renderGraph(td){
+    if(chart)chart.destroy();
     const g=buildGraph(td);
     const ctx=document.getElementById('tideChart').getContext('2d');
     chart=new Chart(ctx,{
         type:'line',
-        data:{labels:g.labels,datasets:[{
-            data:g.values, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,0.08)',
-            borderWidth:2, fill:true, tension:0.3, pointRadius:0,
-        }]},
+        data:{labels:g.labels,datasets:[{data:g.values,borderColor:'#38bdf8',backgroundColor:'rgba(56,189,248,0.08)',borderWidth:2,fill:true,tension:0.3,pointRadius:0}]},
         options:{
-            responsive:true, maintainAspectRatio:false,
+            responsive:true,maintainAspectRatio:false,
             plugins:{legend:{display:false}},
             scales:{
-                x:{ ticks:{color:'#475569',maxTicksLimit:8,font:{size:9}}, grid:{color:'rgba(71,85,105,0.15)'}},
-                y:{ ticks:{color:'#475569',callback:v=>v+'cm',font:{size:9}}, grid:{color:'rgba(71,85,105,0.15)'}},
+                x:{ticks:{color:'#475569',maxTicksLimit:8,font:{size:9}},grid:{color:'rgba(71,85,105,0.15)'}},
+                y:{ticks:{color:'#475569',callback:v=>v+'cm',font:{size:9}},grid:{color:'rgba(71,85,105,0.15)'}},
             },
             interaction:{intersect:false,mode:'index'},
         },
-        plugins:[{
-            id:'markers',
-            afterDraw(c){
-                const xa=c.scales.x, ya=c.scales.y;
-                c.ctx.font='bold 9px sans-serif';
-                g.hts.forEach(({idx,height}) => {
-                    const x=xa.getPixelForValue(idx), y=ya.getPixelForValue(height);
-                    c.ctx.beginPath(); c.ctx.arc(x,y,4,0,Math.PI*2);
-                    c.ctx.fillStyle='#60a5fa'; c.ctx.fill();
-                    c.ctx.fillStyle='#60a5fa'; c.ctx.textAlign='center';
-                    c.ctx.fillText('▲'+height,x,y-10);
-                });
-                g.lts.forEach(({idx,height}) => {
-                    const x=xa.getPixelForValue(idx), y=ya.getPixelForValue(height);
-                    c.ctx.beginPath(); c.ctx.arc(x,y,4,0,Math.PI*2);
-                    c.ctx.fillStyle='#f97316'; c.ctx.fill();
-                    c.ctx.fillStyle='#f97316'; c.ctx.textAlign='center';
-                    c.ctx.fillText('▼'+height,x,y+18);
-                });
-                // Current time indicator
-                const now=new Date();
-                if(td.month===now.getMonth()+1 && td.day===now.getDate()){
-                    const curHM = now.getHours()*60 + now.getMinutes();
-                    // Find current height from the graph data
-                    const curIdx = Math.round(curHM / 15);
-                    if(curIdx>=0 && curIdx<g.values.length){
-                        const curX = xa.getPixelForValue(curIdx);
-                        const curY = ya.getPixelForValue(g.values[curIdx]);
-                        // Vertical dashed line
-                        c.ctx.beginPath(); c.ctx.moveTo(curX, ya.top);
-                        c.ctx.lineTo(curX, ya.bottom);
-                        c.ctx.strokeStyle='rgba(255,255,255,0.4)'; c.ctx.setLineDash([3,4]);
-                        c.ctx.lineWidth=1.5; c.ctx.stroke(); c.ctx.setLineDash([]);
-                        // Current position dot
-                        c.ctx.beginPath(); c.ctx.arc(curX, curY, 5, 0, Math.PI*2);
-                        c.ctx.fillStyle='#fff'; c.ctx.fill();
-                        c.ctx.beginPath(); c.ctx.arc(curX, curY, 3, 0, Math.PI*2);
-                        c.ctx.fillStyle='#f97316'; c.ctx.fill();
-                        // Label
-                        c.ctx.font='bold 9px sans-serif';
-                        c.ctx.fillStyle='#fff';
-                        c.ctx.textAlign='left';
-                        c.ctx.fillText('현재 '+g.values[curIdx]+'cm', curX+8, curY-4);
-                    }
+        plugins:[{id:'m',afterDraw(c){
+            const xa=c.scales.x,ya=c.scales.y;
+            c.ctx.font='bold 9px sans-serif';
+            g.hts.forEach(({idx,height})=>{
+                const x=xa.getPixelForValue(idx),y=ya.getPixelForValue(height);
+                c.ctx.beginPath();c.ctx.arc(x,y,4,0,Math.PI*2);
+                c.ctx.fillStyle='#60a5fa';c.ctx.fill();
+                c.ctx.fillStyle='#60a5fa';c.ctx.textAlign='center';
+                c.ctx.fillText('▲'+height,x,y-10);
+            });
+            g.lts.forEach(({idx,height})=>{
+                const x=xa.getPixelForValue(idx),y=ya.getPixelForValue(height);
+                c.ctx.beginPath();c.ctx.arc(x,y,4,0,Math.PI*2);
+                c.ctx.fillStyle='#f97316';c.ctx.fill();
+                c.ctx.fillStyle='#f97316';c.ctx.textAlign='center';
+                c.ctx.fillText('▼'+height,x,y+18);
+            });
+            const now=new Date();
+            if(td.month===now.getMonth()+1&&td.day===now.getDate()){
+                const curIdx=Math.round((now.getHours()*60+now.getMinutes())/15);
+                if(curIdx>=0&&curIdx<g.values.length){
+                    const cx=xa.getPixelForValue(curIdx),cy=ya.getPixelForValue(g.values[curIdx]);
+                    c.ctx.beginPath();c.ctx.moveTo(cx,ya.top);c.ctx.lineTo(cx,ya.bottom);
+                    c.ctx.strokeStyle='rgba(255,255,255,0.4)';c.ctx.setLineDash([3,4]);
+                    c.ctx.lineWidth=1.5;c.ctx.stroke();c.ctx.setLineDash([]);
+                    c.ctx.beginPath();c.ctx.arc(cx,cy,5,0,Math.PI*2);
+                    c.ctx.fillStyle='#fff';c.ctx.fill();
+                    c.ctx.beginPath();c.ctx.arc(cx,cy,3,0,Math.PI*2);
+                    c.ctx.fillStyle='#f97316';c.ctx.fill();
+                    c.ctx.font='bold 9px sans-serif';c.ctx.fillStyle='#fff';c.ctx.textAlign='left';
+                    c.ctx.fillText('현재 '+g.values[curIdx]+'cm',cx+8,cy-4);
                 }
             }
-        }],
+        }}],
     });
 }
 
 // ═══════════════════════════════════════════
-// Tide rows
+// Render detail card for selected day
 // ═══════════════════════════════════════════
-function getTideBadge(pct) {
-    if(pct==null) return {cls:'neutral',text:''};
-    if(pct>=80) return {cls:'high',text:'강'};
-    if(pct>=50) return {cls:'mid',text:'중'};
-    return {cls:'low',text:'약'};
-}
+function renderDetail(td){
+    const flowBadge=td.flow_pct!=null?(td.flow_pct>=80?'강':td.flow_pct>=50?'중':'약'):'';
+    const mj=(td.manjo||[]).map(x=>`<div class="tide-item"><span class="ti">${x.time}</span><span class="th">${x.height}cm</span><span class="tdiff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span></div>`).join('');
+    const gj=(td.ganjo||[]).map(x=>`<div class="tide-item"><span class="ti">${x.time}</span><span class="th">${x.height}cm</span><span class="tdiff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span></div>`).join('');
 
-function renderRows(m, d) {
-    const idx=tideData.findIndex(t=>t.month===m&&t.day===d);
-    if(idx<0) return;
-    const days=tideData.slice(idx,idx+15);
-
-    let html='';
-    days.forEach(t=>{
-        const isToday=t.month===today.getMonth()+1&&t.day===today.getDate();
-        const badge=getTideBadge(t.flow_pct);
-        const manjoHTML=(t.manjo||[]).map(x=>
-            `<div class="time-line manjo">
-                <span class="t">${x.time}</span><span class="h">${x.height}cm</span>
-                <span class="diff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span>
-            </div>`).join('');
-        const ganjoHTML=(t.ganjo||[]).map(x=>
-            `<div class="time-line ganjo">
-                <span class="t">${x.time}</span><span class="h">${x.height}cm</span>
-                <span class="diff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span>
-            </div>`).join('');
-        const dowCls=['일','토'].includes(t.dow) ? (t.dow==='일'?'sun':'sat') : '';
-
-        html+=`<div class="tide-row${isToday?' today':''}" onclick="selectDay(${t.month},${t.day})">
-            <div class="row-date">
-                <div class="day">${t.day}</div>
-                <div class="dow ${dowCls}">${t.dow}</div>
-                <div class="lunar">${t.lunar}</div>
+    document.getElementById('detailCard').innerHTML=`
+        <div class="dtop">
+            <div class="dlabel">📅 ${td.month}월 ${td.day}일 (${td.dow}) · 음력 ${td.lunar}</div>
+            <span class="dbadge">${td.tide_class}물 ${flowBadge}</span>
+        </div>
+        <div class="tides">
+            <div class="tide-g">
+                <div class="tlabel hi">▲ 만조 (High Tide)</div>${mj||'<div style="color:#888;font-size:0.8rem">-</div>'}
             </div>
-            <div class="row-tide">
-                <span class="tide-badge ${badge.cls}">${t.tide_class}물${badge.text?' '+badge.text:''}</span>
+            <div class="tide-g">
+                <div class="tlabel lo">▼ 간조 (Low Tide)</div>${gj||'<div style="color:#888;font-size:0.8rem">-</div>'}
             </div>
-            <div class="row-times">
-                ${manjoHTML}${ganjoHTML}
-            </div>
+        </div>
+        <div class="sunmoon">
+            <span>☀️ 일출몰 ${td.sunrise_set||'-'}</span>
+            <span>🌙 월출몰 ${td.moonrise_set||'-'}</span>
         </div>`;
-    });
-    document.getElementById('tideList').innerHTML=html;
 }
 
 // ═══════════════════════════════════════════
-// Header + chips
+// Weather
 // ═══════════════════════════════════════════
-function renderChips(sm, sd) {
-    let html='';
-    for(let i=0;i<10;i++){
-        const d=new Date(today); d.setDate(today.getDate()+i);
-        const m=d.getMonth()+1, dt=d.getDate();
-        const dow=['일','월','화','수','목','금','토'][d.getDay()];
-        const sel=m===sm&&dt===sd;
-        html+=`<button class="chip${sel?' selected':''}" onclick="selectDay(${m},${dt})">${i===0?'오늘 ':''}${m}/${dt}(${dow})</button>`;
-    }
-    document.getElementById('chips').innerHTML=html;
+function wIcon(c){
+    if(!c)return'🌤️';
+    if(c.includes('비')||c.includes('소나기'))return'🌧️';
+    if(c.includes('눈'))return'🌨️';
+    if(c.includes('맑음'))return'☀️';
+    if(c.includes('구름많음'))return'⛅';
+    if(c.includes('흐림'))return'☁️';
+    return'🌤️';
 }
-
-function selectDay(m, d) {
-    selected={m,d};
-    const td=tideData.find(t=>t.month===m&&t.day===d);
-    if(!td) return;
-
-    document.getElementById('headerDate').textContent=`${m}월 ${d}일 (${td.dow})`;
-    document.getElementById('tideClass').textContent=`${td.tide_class}물`;
-    document.getElementById('tideSummary').textContent=
-        `만조 ${(td.manjo||[]).map(x=>x.time).join(', ')} · 간조 ${(td.ganjo||[]).map(x=>x.time).join(', ')}`;
-
-    renderGraph(td);
-    renderRows(m, d);
-    renderChips(m, d);
-}
-
-function weatherIcon(cond) {
-    if(!cond) return '🌤️';
-    if(cond.includes('비')||cond.includes('소나기')) return '🌧️';
-    if(cond.includes('눈')) return '🌨️';
-    if(cond.includes('맑음')) return '☀️';
-    if(cond.includes('구름많음')) return '⛅';
-    if(cond.includes('흐림')) return '☁️';
-    if(cond.includes('안개')) return '🌫️';
-    return '🌤️';
-}
-
 function renderWeather(sw){
-    const dailyDiv=document.getElementById('wxDaily');
-    const extDiv=document.getElementById('wxExtended');
-    const titleEl=document.querySelector('.wx-inner h3');
-
-    const area=sw.area||'바다날씨';
-    titleEl.textContent='🌊 '+area;
-
-    // Daily forecast
-    let html='';
+    swData=sw||{};
+    let h='';
     (sw.daily||[]).slice(0,3).forEach(day=>{
-        html+=`<div class="wx-day"><div class="wx-date">📅 ${day.date}</div>`;
+        h+=`<div class="wxday"><div class="wxd">📅 ${day.date}</div>`;
         (day.times||[]).forEach(t=>{
-            html+=`<div class="wx-row">
-                <span class="wx-when">${t.when}</span>
-                <span class="wx-wicon">${weatherIcon(t.weather)}</span>
-                <span class="wx-cond">${t.weather}</span>
-                <span class="wx-wind">🌬️ ${t.wind_dir} ${t.wind_speed}m/s</span>
-                <span class="wx-wave">🌊 ${t.wave}m</span>
+            h+=`<div class="wxrow">
+                <span class="ww">${t.when}</span><span class="wi">${wIcon(t.weather)}</span>
+                <span class="wc">${t.weather}</span>
+                <span class="wd">🌬️${t.wind_dir} ${t.wind_speed}m/s</span>
+                <span class="wv">🌊${t.wave}m</span>
             </div>`;
         });
-        html+='</div>';
+        h+='</div>';
     });
-    dailyDiv.innerHTML=html;
-
-    // Extended forecast
-    let extHtml='';
+    document.getElementById('wxDaily').innerHTML=h;
+    let e='';
     (sw.extended||[]).forEach(row=>{
-        extHtml+='<div class="wx-ext">';
-        row.forEach((cell,i)=>{
-            extHtml+=`${i>0?' · ':''}${i===0?'<b>'+cell+'</b>':cell}`;
-        });
-        extHtml+='</div>';
+        e+='<div class="wxext">'+row.map((c,i)=>i===0?'<b>'+c+'</b>':c).join(' · ')+'</div>';
     });
-    extDiv.innerHTML=extHtml;
+    document.getElementById('wxExtended').innerHTML=e;
+}
+
+// ═══════════════════════════════════════════
+// Select day
+// ═══════════════════════════════════════════
+function selectDay(m,d){
+    selected={m,d};
+    const td=tideData.find(t=>t.month===m&&t.day===d);
+    if(!td)return;
+    document.getElementById('hd').textContent=`${m}월 ${d}일 (${td.dow})`;
+    document.getElementById('tcls').textContent=td.tide_class+'물';
+    document.getElementById('tsum').textContent=
+        '만조 '+(td.manjo||[]).map(x=>x.time).join(', ')+' · 간조 '+(td.ganjo||[]).map(x=>x.time).join(', ');
+    renderGraph(td);
+    renderDetail(td);
+    // Chips
+    let chips='';
+    for(let i=0;i<10;i++){
+        const d2=new Date(today);d2.setDate(today.getDate()+i);
+        const dm=d2.getMonth()+1,dd=d2.getDate();
+        chips+=`<button class="chip${dm===m&&dd===d?' sel':''}" onclick="selectDay(${dm},${dd})">${i===0?'오늘 ':''}${dm}/${dd}(${['일','월','화','수','목','금','토'][d2.getDay()]})</button>`;
+    }
+    document.getElementById('chips').innerHTML=chips;
 }
 
 // ═══════════════════════════════════════════
@@ -423,20 +310,15 @@ function renderWeather(sw){
 // ═══════════════════════════════════════════
 async function load(){
     try{
-        const resp=await fetch('tide_data.json?t='+Date.now());
-        const data=await resp.json();
+        const r=await fetch('tide_data.json?t='+Date.now());
+        const data=await r.json();
         tideData=data.tides||[];
-
-        document.getElementById('seaTemp').innerHTML=data.sea_temp?data.sea_temp.toFixed(1)+'<span class="unit">°C</span>':'--°C';
-        document.getElementById('updateTime').textContent='갱신: '+(data.updated||'').replace('T',' ').slice(5,16);
-        // Render weather
+        document.getElementById('temp').innerHTML=(data.sea_temp||'--')+'<u>°C</u>';
+        document.getElementById('utime').textContent='갱신: '+(data.updated||'').replace('T',' ').slice(5,16);
         renderWeather(data.sea_weather||{});
-
-        const m=today.getMonth()+1, d=today.getDate();
-        selectDay(m, d);
-    }catch(e){
-        document.getElementById('tideList').innerHTML='<div style="text-align:center;padding:40px;color:#999">데이터를 불러오지 못했습니다</div>';
-    }
+        const m=today.getMonth()+1,d=today.getDate();
+        selectDay(m,d);
+    }catch(e){}
 }
 load();
 </script>
