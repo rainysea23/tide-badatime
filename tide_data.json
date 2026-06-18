@@ -1,7 +1,7 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-06-19T05:24:06.302584+09:00",
+  "updated": "2026-06-19T07:55:19.325834+09:00",
   "sea_temp": 21.5,
   "sea_weather": {
     "area": "충남남부앞바다",
@@ -20,7 +20,7 @@
             "when": "오후",
             "weather": "흐리고한때비",
             "wind_dir": "남-남서",
-            "wind_speed": "3-6",
+            "wind_speed": "4-8",
             "wave": "0.5-0.5"
           }
         ]
@@ -32,15 +32,34 @@
             "when": "오전",
             "weather": "흐리고비",
             "wind_dir": "북동-동",
-            "wind_speed": "3-7",
-            "wave": "0.5-0.5"
+            "wind_speed": "5-11",
+            "wave": "0.5-1.5"
           },
           {
             "when": "오후",
             "weather": "구름많고한때비",
             "wind_dir": "서-북서",
-            "wind_speed": "4-9",
+            "wind_speed": "5-11",
+            "wave": "0.5-1.5"
+          }
+        ]
+      },
+      {
+        "date": "6.21(일)",
+        "times": [
+          {
+            "when": "오전",
+            "weather": "구름많음",
+            "wind_dir": "북서-북",
+            "wind_speed": "4-8",
             "wave": "0.5-1.0"
+          },
+          {
+            "when": "오후",
+            "weather": "구름많음",
+            "wind_dir": "북서-북",
+            "wind_speed": "3-6",
+            "wave": "0.5-0.5"
           }
         ]
       }
@@ -48,21 +67,19 @@
     "extended": [
       [
         "날씨",
-        "차차흐려짐",
         "흐림",
         "구름많음",
         "구름많음",
         "구름많음",
-        ""
+        "구름많음"
       ],
       [
         "파고",
         "1-1",
-        "1-1",
         "1-2",
         "1-2",
         "1-2",
-        ""
+        "1-2"
       ]
     ],
     "hourly_labels": [],
@@ -174,7 +191,7 @@
       "sunrise_set": "05:1719:56",
       "moonrise_set": "11:53----",
       "moon_img": 7,
-      "weather_img": "//images.badatime.com/weather/6.png",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 6
     },
     {
@@ -349,7 +366,7 @@
       "sunrise_set": "05:1919:57",
       "moonrise_set": "16:5802:04",
       "moon_img": 12,
-      "weather_img": "",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 6
     },
     {
