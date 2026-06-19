@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-06-19T13:07:50.658884+09:00",
-  "sea_temp": 22.3,
+  "updated": "2026-06-19T19:23:38.755334+09:00",
+  "sea_temp": 21.5,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
@@ -19,8 +19,8 @@
           {
             "when": "오후",
             "weather": "흐리고한때비",
-            "wind_dir": "남-남서",
-            "wind_speed": "4-8",
+            "wind_dir": "북동-동",
+            "wind_speed": "3-6",
             "wave": "0.5-0.5"
           }
         ]
@@ -31,16 +31,16 @@
           {
             "when": "오전",
             "weather": "흐리고비",
-            "wind_dir": "북동-동",
-            "wind_speed": "5-11",
-            "wave": "0.5-1.5"
+            "wind_dir": "남서-서",
+            "wind_speed": "5-12",
+            "wave": "0.5-2.0"
           },
           {
             "when": "오후",
-            "weather": "구름많고한때비",
+            "weather": "흐리고한때비",
             "wind_dir": "서-북서",
-            "wind_speed": "5-11",
-            "wave": "0.5-1.5"
+            "wind_speed": "6-12",
+            "wave": "1.0-2.0"
           }
         ]
       },
@@ -68,7 +68,7 @@
       [
         "날씨",
         "흐림",
-        "구름많음",
+        "흐린후갬",
         "구름많음",
         "구름많음",
         "구름많음"
@@ -76,10 +76,10 @@
       [
         "파고",
         "1-1",
+        "1-1",
         "1-2",
-        "1-2",
-        "1-2",
-        "1-2"
+        "1-1",
+        "1-1"
       ]
     ],
     "hourly_labels": [],
@@ -263,7 +263,7 @@
       "sunrise_set": "05:1819:57",
       "moonrise_set": "13:5600:42",
       "moon_img": 9,
-      "weather_img": "//images.badatime.com/weather/3.png",
+      "weather_img": "//images.badatime.com/weather/5.png",
       "month": 6
     },
     {
