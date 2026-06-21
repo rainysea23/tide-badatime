@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-06-22T04:27:25.681514+09:00",
-  "sea_temp": 22.7,
+  "updated": "2026-06-22T07:13:19.031026+09:00",
+  "sea_temp": 22.1,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
@@ -12,13 +12,13 @@
           {
             "when": "오전",
             "weather": "흐림",
-            "wind_dir": "북-북동",
-            "wind_speed": "3-6",
+            "wind_dir": "남서-서",
+            "wind_speed": "2-5",
             "wave": "0.5-0.5"
           },
           {
             "when": "오후",
-            "weather": "맑음",
+            "weather": "구름많음",
             "wind_dir": "남-남서",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
@@ -31,14 +31,33 @@
           {
             "when": "오전",
             "weather": "구름많음",
-            "wind_dir": "동-남동",
+            "wind_dir": "북동-동",
+            "wind_speed": "3-6",
+            "wave": "0.5-0.5"
+          },
+          {
+            "when": "오후",
+            "weather": "맑음",
+            "wind_dir": "북동-동",
+            "wind_speed": "3-6",
+            "wave": "0.5-0.5"
+          }
+        ]
+      },
+      {
+        "date": "6.24(수)",
+        "times": [
+          {
+            "when": "오전",
+            "weather": "구름많음",
+            "wind_dir": "북동-동",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
           },
           {
             "when": "오후",
             "weather": "구름많음",
-            "wind_dir": "북서-북",
+            "wind_dir": "북동-동",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
           }
@@ -48,12 +67,11 @@
     "extended": [
       [
         "날씨",
-        "흐린후갬",
+        "맑음",
         "구름많음",
         "구름많음",
         "구름많음",
-        "구름많음",
-        ""
+        "구름많음"
       ],
       [
         "파고",
@@ -61,8 +79,7 @@
         "1-1",
         "1-1",
         "1-1",
-        "1-2",
-        ""
+        "1-2"
       ]
     ],
     "hourly_labels": [],
@@ -174,7 +191,7 @@
       "sunrise_set": "05:1819:57",
       "moonrise_set": "14:5701:07",
       "moon_img": 10,
-      "weather_img": "//images.badatime.com/weather/5.png",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 6
     },
     {
@@ -205,7 +222,7 @@
       "sunrise_set": "05:1919:57",
       "moonrise_set": "15:5701:34",
       "moon_img": 11,
-      "weather_img": "//images.badatime.com/weather/3.png",
+      "weather_img": "//images.badatime.com/weather/1.png",
       "month": 6
     },
     {
@@ -349,7 +366,7 @@
       "sunrise_set": "05:2019:57",
       "moonrise_set": "19:4504:07",
       "moon_img": 15,
-      "weather_img": "",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 6
     },
     {
