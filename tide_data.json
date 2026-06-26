@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-06-26T18:22:07.936892+09:00",
-  "sea_temp": 22.8,
+  "updated": "2026-06-26T23:21:00.126941+09:00",
+  "sea_temp": 23.3,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
@@ -68,9 +68,9 @@
       [
         "날씨",
         "구름많음",
-        "구름많음",
-        "구름많음",
         "흐림",
+        "구름많음",
+        "구름많음",
         "흐림"
       ],
       [
@@ -263,7 +263,7 @@
       "sunrise_set": "05:2019:57",
       "moonrise_set": "20:3005:01",
       "moon_img": 16,
-      "weather_img": "//images.badatime.com/weather/3.png",
+      "weather_img": "//images.badatime.com/weather/4.png",
       "month": 6
     },
     {
@@ -335,7 +335,7 @@
       "sunrise_set": "05:2119:57",
       "moonrise_set": "21:4207:00",
       "moon_img": 18,
-      "weather_img": "//images.badatime.com/weather/4.png",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 7
     },
     {
