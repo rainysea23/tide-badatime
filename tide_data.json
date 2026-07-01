@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-07-01T18:42:05.083427+09:00",
-  "sea_temp": 23.3,
+  "updated": "2026-07-01T22:29:30.957401+09:00",
+  "sea_temp": 23.7,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
@@ -120,7 +120,7 @@
       "moonrise_set": "21:0905:59",
       "moon_img": 17,
       "weather_img": "//images.badatime.com/weather/10.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 2,
@@ -156,7 +156,7 @@
       "moonrise_set": "21:4207:00",
       "moon_img": 18,
       "weather_img": "//images.badatime.com/weather/3.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 3,
@@ -187,7 +187,7 @@
       "moonrise_set": "22:1108:02",
       "moon_img": 19,
       "weather_img": "//images.badatime.com/weather/4.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 4,
@@ -223,7 +223,7 @@
       "moonrise_set": "22:3709:03",
       "moon_img": 20,
       "weather_img": "//images.badatime.com/weather/7.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 5,
@@ -259,7 +259,7 @@
       "moonrise_set": "23:0110:04",
       "moon_img": 21,
       "weather_img": "//images.badatime.com/weather/10.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 6,
@@ -295,7 +295,7 @@
       "moonrise_set": "23:2611:06",
       "moon_img": 22,
       "weather_img": "//images.badatime.com/weather/10.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 7,
@@ -331,7 +331,7 @@
       "moonrise_set": "23:5112:09",
       "moon_img": 23,
       "weather_img": "//images.badatime.com/weather/4.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 8,
@@ -367,7 +367,7 @@
       "moonrise_set": "----13:15",
       "moon_img": 24,
       "weather_img": "//images.badatime.com/weather/4.png",
-      "month": 6
+      "month": 7
     },
     {
       "day": 9,
@@ -403,7 +403,7 @@
       "moonrise_set": "00:1914:25",
       "moon_img": 25,
       "weather_img": "",
-      "month": 6
+      "month": 7
     },
     {
       "day": 10,
@@ -434,7 +434,7 @@
       "moonrise_set": "00:5315:39",
       "moon_img": 26,
       "weather_img": "",
-      "month": 6
+      "month": 7
     },
     {
       "day": 11,
@@ -470,7 +470,7 @@
       "moonrise_set": "01:3416:54",
       "moon_img": 27,
       "weather_img": "",
-      "month": 6
+      "month": 7
     },
     {
       "day": 12,
@@ -506,7 +506,7 @@
       "moonrise_set": "02:2518:07",
       "moon_img": 28,
       "weather_img": "",
-      "month": 6
+      "month": 7
     },
     {
       "day": 13,
@@ -542,7 +542,7 @@
       "moonrise_set": "03:2919:11",
       "moon_img": 29,
       "weather_img": "",
-      "month": 6
+      "month": 7
     },
     {
       "day": 14,
@@ -578,7 +578,7 @@
       "moonrise_set": "04:4120:05",
       "moon_img": 1,
       "weather_img": "",
-      "month": 6
+      "month": 7
     },
     {
       "day": 15,
@@ -614,7 +614,7 @@
       "moonrise_set": "05:5920:48",
       "moon_img": 2,
       "weather_img": "",
-      "month": 6
+      "month": 7
     }
   ]
 }
