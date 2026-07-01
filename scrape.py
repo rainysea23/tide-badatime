@@ -13,7 +13,7 @@ HEADERS = {
     "Accept-Language": "ko-KR,ko;q=0.9",
 }
 
-def parse_tide_table(soup):
+def parse_tide_table(soup, current_month=1):
     """Parse main tide table (table[1], 15 days)"""
     tables = soup.find_all("table")
     if len(tables) < 2:
@@ -95,11 +95,12 @@ def parse_tide_table(soup):
             # Determine month from context (first row has smaller day -> next month)
             if rows and row["day"] is not None and rows[-1]["day"] is not None:
                 if row["day"] < rows[-1]["day"]:
-                    row["month"] = rows[-1]["month"] + 1 if rows[-1]["month"] else 6
+                    next_month = (rows[-1]["month"] % 12) + 1 if rows[-1]["month"] else current_month
+                    row["month"] = next_month
                 else:
-                    row["month"] = rows[-1]["month"] if rows[-1]["month"] else 6
+                    row["month"] = rows[-1]["month"] if rows[-1]["month"] else current_month
             else:
-                row["month"] = 6  # current month
+                row["month"] = current_month
             rows.append(row)
         except Exception as e:
             print(f"  Row parse error: {e}", file=sys.stderr)
@@ -183,16 +184,16 @@ def parse_sea_temp(soup):
 
 
 def main():
+    now_kst = datetime.now(KST)
     print(f"Scraping: {URL}")
     resp = requests.get(URL, headers=HEADERS, timeout=20)
     resp.encoding = "utf-8"
     soup = BeautifulSoup(resp.text, "lxml")
 
-    tides = parse_tide_table(soup)
+    tides = parse_tide_table(soup, current_month=now_kst.month)
     sea_temp = parse_sea_temp(soup)
     sea_weather = parse_sea_weather(soup)
 
-    now_kst = datetime.now(KST)
     data = {
         "location": "내파수도",
         "location_id": LOCATION_ID,
