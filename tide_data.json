@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-08-10T13:27:45.215696+09:00",
-  "sea_temp": 29.7,
+  "updated": "2026-08-10T16:27:55.978056+09:00",
+  "sea_temp": null,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
