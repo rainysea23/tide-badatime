@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-08-18T15:38:40.519873+09:00",
-  "sea_temp": 28.1,
+  "updated": "2026-08-18T18:29:40.077669+09:00",
+  "sea_temp": 27.5,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
@@ -18,8 +18,8 @@
           },
           {
             "when": "오후",
-            "weather": "맑음",
-            "wind_dir": "서-북서",
+            "weather": "구름많음",
+            "wind_dir": "남-남서",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
           }
@@ -30,15 +30,15 @@
         "times": [
           {
             "when": "오전",
-            "weather": "흐리고가끔비",
-            "wind_dir": "동-남동",
+            "weather": "흐리고한때비",
+            "wind_dir": "남동-남",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
           },
           {
             "when": "오후",
             "weather": "구름많음",
-            "wind_dir": "남-남서",
+            "wind_dir": "남동-남",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
           }
@@ -50,15 +50,15 @@
           {
             "when": "오전",
             "weather": "흐림",
-            "wind_dir": "남동-남",
-            "wind_speed": "3-7",
+            "wind_dir": "북동-동",
+            "wind_speed": "3-6",
             "wave": "0.5-0.5"
           },
           {
             "when": "오후",
             "weather": "구름많음",
-            "wind_dir": "남동-남",
-            "wind_speed": "3-7",
+            "wind_dir": "북서-북",
+            "wind_speed": "3-6",
             "wave": "0.5-0.5"
           }
         ]
