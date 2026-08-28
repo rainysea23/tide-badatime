@@ -1,43 +1,24 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-08-27T22:45:59.112896+09:00",
-  "sea_temp": 28.6,
+  "updated": "2026-08-28T09:13:44.263617+09:00",
+  "sea_temp": 28.2,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
-      {
-        "date": "8.27(목)",
-        "times": [
-          {
-            "when": "오전",
-            "weather": "구름많음",
-            "wind_dir": "북-북동",
-            "wind_speed": "3-6",
-            "wave": "0.5-0.5"
-          },
-          {
-            "when": "오후",
-            "weather": "구름많음",
-            "wind_dir": "남-남서",
-            "wind_speed": "3-6",
-            "wave": "0.5-0.5"
-          }
-        ]
-      },
       {
         "date": "8.28(금)",
         "times": [
           {
             "when": "오전",
-            "weather": "흐리고한때비",
+            "weather": "구름많고한때비",
             "wind_dir": "남동-남",
             "wind_speed": "3-6",
             "wave": "0.5-0.5"
           },
           {
             "when": "오후",
-            "weather": "흐리고가끔비",
+            "weather": "흐리고비",
             "wind_dir": "남-남서",
             "wind_speed": "4-8",
             "wave": "0.5-1.0"
@@ -49,17 +30,36 @@
         "times": [
           {
             "when": "오전",
-            "weather": "흐리고가끔비",
-            "wind_dir": "남-남서",
+            "weather": "흐리고비",
+            "wind_dir": "남서-서",
             "wind_speed": "4-8",
             "wave": "0.5-1.0"
           },
           {
             "when": "오후",
-            "weather": "흐리고한때비",
-            "wind_dir": "남서-서",
+            "weather": "구름많고한때비",
+            "wind_dir": "북서-북",
             "wind_speed": "4-8",
             "wave": "0.5-1.0"
+          }
+        ]
+      },
+      {
+        "date": "8.30(일)",
+        "times": [
+          {
+            "when": "오전",
+            "weather": "흐리고비",
+            "wind_dir": "북동-동",
+            "wind_speed": "3-6",
+            "wave": "0.5-0.5"
+          },
+          {
+            "when": "오후",
+            "weather": "흐리고가끔비",
+            "wind_dir": "북서-북",
+            "wind_speed": "3-6",
+            "wave": "0.5-0.5"
           }
         ]
       }
@@ -67,8 +67,8 @@
     "extended": [
       [
         "날씨",
-        "비",
         "흐림",
+        "구름많음",
         "구름많음",
         "구름많음",
         "구름많음"
@@ -76,7 +76,7 @@
       [
         "파고",
         "1-1",
-        "1-1",
+        "1-2",
         "1-2",
         "1-2",
         "1-2"
@@ -86,42 +86,6 @@
     "hourly_data": {}
   },
   "tides": [
-    {
-      "day": 27,
-      "dow": "목",
-      "lunar": "7.15",
-      "tide_class": "6",
-      "flow_pct": 72,
-      "manjo": [
-        {
-          "time": "03:21",
-          "height": 628,
-          "diff": 503
-        },
-        {
-          "time": "15:23",
-          "height": 575,
-          "diff": 410
-        }
-      ],
-      "ganjo": [
-        {
-          "time": "09:52",
-          "height": 165,
-          "diff": -463
-        },
-        {
-          "time": "21:46",
-          "height": 91,
-          "diff": -484
-        }
-      ],
-      "sunrise_set": "06:0219:11",
-      "moonrise_set": "18:4404:45",
-      "moon_img": 15,
-      "weather_img": "//images.badatime.com/weather/3.png",
-      "month": 8
-    },
     {
       "day": 28,
       "dow": "금",
@@ -155,7 +119,7 @@
       "sunrise_set": "06:0319:09",
       "moonrise_set": "19:1005:49",
       "moon_img": 16,
-      "weather_img": "//images.badatime.com/weather/10.png",
+      "weather_img": "//images.badatime.com/weather/13.png",
       "month": 8
     },
     {
@@ -402,7 +366,7 @@
       "sunrise_set": "06:0818:59",
       "moonrise_set": "23:0413:40",
       "moon_img": 23,
-      "weather_img": "",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 9
     },
     {
@@ -613,6 +577,42 @@
       "sunrise_set": "06:1318:51",
       "moonrise_set": "04:5518:17",
       "moon_img": 29,
+      "weather_img": "",
+      "month": 9
+    },
+    {
+      "day": 11,
+      "dow": "금",
+      "lunar": "8.1",
+      "tide_class": "7",
+      "flow_pct": null,
+      "manjo": [
+        {
+          "time": "03:35",
+          "height": 684,
+          "diff": 643
+        },
+        {
+          "time": "15:46",
+          "height": 647,
+          "diff": 571
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "10:10",
+          "height": 76,
+          "diff": -608
+        },
+        {
+          "time": "22:19",
+          "height": 27,
+          "diff": -620
+        }
+      ],
+      "sunrise_set": "06:1418:49",
+      "moonrise_set": "06:0418:44",
+      "moon_img": 1,
       "weather_img": "",
       "month": 9
     }
