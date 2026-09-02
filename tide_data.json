@@ -1,8 +1,8 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-09-03T03:24:55.576444+09:00",
-  "sea_temp": 27.1,
+  "updated": "2026-09-03T07:58:15.687124+09:00",
+  "sea_temp": 26.8,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
@@ -14,7 +14,7 @@
             "weather": "구름많음",
             "wind_dir": "북-북동",
             "wind_speed": "3-8",
-            "wave": "0.5-1.0"
+            "wave": "0.5-0.5"
           },
           {
             "when": "오후",
@@ -43,26 +43,43 @@
             "wave": "0.5-1.0"
           }
         ]
+      },
+      {
+        "date": "9.5(토)",
+        "times": [
+          {
+            "when": "오전",
+            "weather": "맑음",
+            "wind_dir": "북동-동",
+            "wind_speed": "5-10",
+            "wave": "0.5-1.0"
+          },
+          {
+            "when": "오후",
+            "weather": "맑음",
+            "wind_dir": "북-북동",
+            "wind_speed": "5-11",
+            "wave": "0.5-1.0"
+          }
+        ]
       }
     ],
     "extended": [
       [
         "날씨",
-        "구름많음",
-        "차차흐려짐",
         "맑음",
         "맑음",
         "맑음",
-        ""
+        "맑음",
+        "구름많음"
       ],
       [
         "파고",
         "1-1",
-        "1-1",
         "1-2",
         "1-2",
         "1-2",
-        ""
+        "1-2"
       ]
     ],
     "hourly_labels": [],
@@ -174,7 +191,7 @@
       "sunrise_set": "06:0918:58",
       "moonrise_set": "----14:46",
       "moon_img": 24,
-      "weather_img": "//images.badatime.com/weather/3.png",
+      "weather_img": "//images.badatime.com/weather/1.png",
       "month": 9
     },
     {
@@ -210,7 +227,7 @@
       "sunrise_set": "06:1018:57",
       "moonrise_set": "00:0615:45",
       "moon_img": 25,
-      "weather_img": "//images.badatime.com/weather/6.png",
+      "weather_img": "//images.badatime.com/weather/1.png",
       "month": 9
     },
     {
@@ -349,7 +366,7 @@
       "sunrise_set": "06:1318:51",
       "moonrise_set": "04:5518:17",
       "moon_img": 29,
-      "weather_img": "",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 9
     },
     {
