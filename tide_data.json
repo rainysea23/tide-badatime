@@ -1,30 +1,11 @@
 {
   "location": "내파수도",
   "location_id": 1443,
-  "updated": "2026-09-28T21:54:55.726176+09:00",
-  "sea_temp": 24.1,
+  "updated": "2026-09-29T06:03:24.364010+09:00",
+  "sea_temp": 23.9,
   "sea_weather": {
     "area": "충남남부앞바다",
     "daily": [
-      {
-        "date": "9.28(월)",
-        "times": [
-          {
-            "when": "오전",
-            "weather": "흐림",
-            "wind_dir": "북서-북",
-            "wind_speed": "4-8",
-            "wave": "0.5-1.0"
-          },
-          {
-            "when": "오후",
-            "weather": "구름많음",
-            "wind_dir": "북서-북",
-            "wind_speed": "4-8",
-            "wave": "0.5-1.0"
-          }
-        ]
-      },
       {
         "date": "9.29(화)",
         "times": [
@@ -62,6 +43,25 @@
             "wave": "0.5-1.5"
           }
         ]
+      },
+      {
+        "date": "10.1(목)",
+        "times": [
+          {
+            "when": "오전",
+            "weather": "맑음",
+            "wind_dir": "북서-북",
+            "wind_speed": "4-8",
+            "wave": "0.5-1.5"
+          },
+          {
+            "when": "오후",
+            "weather": "맑음",
+            "wind_dir": "북서-북",
+            "wind_speed": "5-10",
+            "wave": "0.5-1.5"
+          }
+        ]
       }
     ],
     "extended": [
@@ -69,17 +69,17 @@
         "날씨",
         "맑음",
         "맑음",
-        "맑음",
         "흐려져비",
+        "구름많음",
         "구름많음"
       ],
       [
         "파고",
         "1-2",
         "1-2",
-        "1-2",
         "1-3",
-        "1-3"
+        "1-3",
+        "1-2"
       ]
     ],
     "hourly_labels": [],
@@ -87,47 +87,11 @@
   },
   "tides": [
     {
-      "day": 28,
-      "dow": "월",
-      "lunar": "8.18",
-      "tide_class": "9",
-      "flow_pct": 91,
-      "manjo": [
-        {
-          "time": "04:12",
-          "height": 650,
-          "diff": 597
-        },
-        {
-          "time": "16:33",
-          "height": 677,
-          "diff": 638
-        }
-      ],
-      "ganjo": [
-        {
-          "time": "10:48",
-          "height": 39,
-          "diff": -611
-        },
-        {
-          "time": "23:11",
-          "height": 58,
-          "diff": -619
-        }
-      ],
-      "sunrise_set": "06:2718:23",
-      "moonrise_set": "18:5707:54",
-      "moon_img": 18,
-      "weather_img": "//images.badatime.com/weather/4.png",
-      "month": 9
-    },
-    {
       "day": 29,
       "dow": "화",
       "lunar": "8.19",
       "tide_class": "10",
-      "flow_pct": 95,
+      "flow_pct": 93,
       "manjo": [
         {
           "time": "04:41",
@@ -163,7 +127,7 @@
       "dow": "수",
       "lunar": "8.20",
       "tide_class": "11",
-      "flow_pct": 93,
+      "flow_pct": 91,
       "manjo": [
         {
           "time": "05:13",
@@ -194,7 +158,7 @@
       "dow": "목",
       "lunar": "8.21",
       "tide_class": "12",
-      "flow_pct": 83,
+      "flow_pct": 82,
       "manjo": [
         {
           "time": "05:48",
@@ -230,7 +194,7 @@
       "dow": "금",
       "lunar": "8.22",
       "tide_class": "13",
-      "flow_pct": 67,
+      "flow_pct": 66,
       "manjo": [
         {
           "time": "06:28",
@@ -266,7 +230,7 @@
       "dow": "토",
       "lunar": "8.23",
       "tide_class": "조금",
-      "flow_pct": 46,
+      "flow_pct": 45,
       "manjo": [
         {
           "time": "07:16",
@@ -302,7 +266,7 @@
       "dow": "일",
       "lunar": "8.24",
       "tide_class": "무시",
-      "flow_pct": 27,
+      "flow_pct": 26,
       "manjo": [
         {
           "time": "08:21",
@@ -374,7 +338,7 @@
       "dow": "화",
       "lunar": "8.26",
       "tide_class": "2",
-      "flow_pct": 36,
+      "flow_pct": 35,
       "manjo": [
         {
           "time": "12:02",
@@ -397,7 +361,7 @@
       "sunrise_set": "06:3418:12",
       "moonrise_set": "01:3115:49",
       "moon_img": 26,
-      "weather_img": "",
+      "weather_img": "//images.badatime.com/weather/3.png",
       "month": 10
     },
     {
@@ -405,7 +369,7 @@
       "dow": "수",
       "lunar": "8.27",
       "tide_class": "3",
-      "flow_pct": 46,
+      "flow_pct": 45,
       "manjo": [
         {
           "time": "01:00",
@@ -441,7 +405,7 @@
       "dow": "목",
       "lunar": "8.28",
       "tide_class": "4",
-      "flow_pct": 64,
+      "flow_pct": 62,
       "manjo": [
         {
           "time": "01:52",
@@ -477,7 +441,7 @@
       "dow": "금",
       "lunar": "8.29",
       "tide_class": "5",
-      "flow_pct": 75,
+      "flow_pct": 73,
       "manjo": [
         {
           "time": "02:32",
@@ -513,7 +477,7 @@
       "dow": "토",
       "lunar": "8.30",
       "tide_class": "6",
-      "flow_pct": 82,
+      "flow_pct": 80,
       "manjo": [
         {
           "time": "03:06",
@@ -549,7 +513,7 @@
       "dow": "일",
       "lunar": "9.1",
       "tide_class": "7",
-      "flow_pct": 88,
+      "flow_pct": 86,
       "manjo": [
         {
           "time": "03:37",
@@ -585,7 +549,7 @@
       "dow": "월",
       "lunar": "9.2",
       "tide_class": "8",
-      "flow_pct": 89,
+      "flow_pct": 87,
       "manjo": [
         {
           "time": "04:06",
@@ -613,6 +577,42 @@
       "sunrise_set": "06:3918:04",
       "moonrise_set": "08:0718:33",
       "moon_img": 2,
+      "weather_img": "",
+      "month": 10
+    },
+    {
+      "day": 13,
+      "dow": "화",
+      "lunar": "9.3",
+      "tide_class": "9",
+      "flow_pct": 83,
+      "manjo": [
+        {
+          "time": "04:35",
+          "height": 607,
+          "diff": 524
+        },
+        {
+          "time": "17:02",
+          "height": 656,
+          "diff": 611
+        }
+      ],
+      "ganjo": [
+        {
+          "time": "11:05",
+          "height": 45,
+          "diff": -562
+        },
+        {
+          "time": "23:36",
+          "height": 111,
+          "diff": -545
+        }
+      ],
+      "sunrise_set": "06:4018:02",
+      "moonrise_set": "09:1119:07",
+      "moon_img": 3,
       "weather_img": "",
       "month": 10
     }
