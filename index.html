@@ -333,8 +333,8 @@ function selectLocation(name){
     document.getElementById('utime').textContent='갱신: '+(updated||'').replace('T',' ').slice(5,16);
     document.querySelectorAll('.locbtn').forEach(b=>b.classList.toggle('sel',b.textContent.includes(name)));
     try{localStorage.setItem('loc',name)}catch(e){}
-    const m=today.getMonth()+1,d=today.getDate();
-    selectDay(m,d);
+    const m=today.getMonth()+1,day=today.getDate();
+    selectDay(m,day);
 }
 
 async function load(){
