@@ -3,8 +3,10 @@ import requests, json, re, sys, os
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 
-LOCATION_ID = 1443
-URL = f"https://www.badatime.com/{LOCATION_ID}/tide"
+LOCATIONS = {
+    "내파수도": 1443,
+    "자월도": 377,
+}
 KST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tide_data.json")
 
@@ -183,35 +185,50 @@ def parse_sea_temp(soup):
     return None
 
 
+def select_locations(argv):
+    """이름 또는 id로 지역 선택 (없으면 전체)"""
+    names = []
+    for a in argv:
+        if a in LOCATIONS:
+            names.append(a)
+        elif a.isdigit() and int(a) in LOCATIONS.values():
+            names.append(next(n for n, i in LOCATIONS.items() if i == int(a)))
+    return names or list(LOCATIONS)
+
+
 def main():
     now_kst = datetime.now(KST)
-    print(f"Scraping: {URL}")
-    resp = requests.get(URL, headers=HEADERS, timeout=20)
-    resp.encoding = "utf-8"
-    soup = BeautifulSoup(resp.text, "lxml")
+    locations = {}
+    for name in select_locations(sys.argv[1:]):
+        lid = LOCATIONS[name]
+        url = f"https://www.badatime.com/{lid}/tide"
+        print(f"Scraping [{name}] {url}")
+        resp = requests.get(url, headers=HEADERS, timeout=20)
+        resp.encoding = "utf-8"
+        soup = BeautifulSoup(resp.text, "lxml")
 
-    tides = parse_tide_table(soup, current_month=now_kst.month)
-    sea_temp = parse_sea_temp(soup)
-    sea_weather = parse_sea_weather(soup)
+        locations[name] = {
+            "location_id": lid,
+            "sea_temp": parse_sea_temp(soup),
+            "sea_weather": parse_sea_weather(soup),
+            "tides": parse_tide_table(soup, current_month=now_kst.month),
+        }
 
     data = {
-        "location": "내파수도",
-        "location_id": LOCATION_ID,
         "updated": now_kst.isoformat(),
-        "sea_temp": sea_temp,
-        "sea_weather": sea_weather,
-        "tides": tides,
+        "locations": locations,
     }
 
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     today = now_kst.strftime("%m/%d")
-    n_daily = len(sea_weather.get("daily", [])) if isinstance(sea_weather, dict) else 0
-    print(f"Done! {len(tides)} days, sea temp={sea_temp}°C, weather={n_daily} days, updated={today}")
-    for t in tides[:3]:
-        mj = " ".join(f'{x["time"]}({x["height"]})' for x in t.get("manjo", []))
-        print(f"  {t['month']}/{t['day']}({t['dow']}) lunar={t['lunar']} | {t['tide_class']} | flow={t['flow_pct']}% | manjo={mj}")
+    for name, d in locations.items():
+        n_daily = len(d["sea_weather"].get("daily", [])) if isinstance(d["sea_weather"], dict) else 0
+        print(f"[{name}] {len(d['tides'])} days, sea temp={d['sea_temp']}°C, weather={n_daily} days, updated={today}")
+        for t in d["tides"][:3]:
+            mj = " ".join(f'{x["time"]}({x["height"]})' for x in t.get("manjo", []))
+            print(f"  {t['month']}/{t['day']}({t['dow']}) lunar={t['lunar']} | {t['tide_class']} | flow={t['flow_pct']}% | manjo={mj}")
 
 
 if __name__ == "__main__":

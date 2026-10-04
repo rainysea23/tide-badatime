@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>내파수도 물때</title>
+<title>바다 물때</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -23,6 +23,13 @@ body{
 .dark .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
 .dark .top .loc{font-size:1.05rem;font-weight:700}
 .dark .top .date{font-size:0.8rem;color:#94a3b8}
+.dark .locbar{display:flex;gap:6px;margin-bottom:8px}
+.dark .locbtn{
+    background:transparent;border:1px solid #334155;border-radius:20px;
+    padding:4px 12px;font-size:0.74rem;color:#94a3b8;cursor:pointer;
+    white-space:nowrap;-webkit-tap-highlight-color:transparent;
+}
+.dark .locbtn.sel{background:#38bdf8;border-color:#38bdf8;color:#0f172a;font-weight:700}
 .dark .info{display:flex;align-items:center;gap:14px;margin-bottom:8px;font-size:0.78rem;color:#94a3b8}
 .dark .info .temp{font-size:2rem;font-weight:700;color:#f97316}
 .dark .info .temp u{font-size:1rem;color:#94a3b8;text-decoration:none}
@@ -106,7 +113,8 @@ body{
 <body>
 
 <div class="dark">
-    <div class="top"><span class="loc">⚓ 내파수도</span><span class="date" id="hd"></span></div>
+    <div class="top"><span class="loc" id="locName">⚓</span><span class="date" id="hd"></span></div>
+    <div class="locbar" id="locbar"></div>
     <div class="info">
         <div class="temp" id="temp">--<u>°C</u></div>
         <div>오늘 물때 <b id="tcls">-</b><br><span id="tsum"></span></div>
@@ -122,12 +130,13 @@ body{
     <div class="wxcard"><h4>🌊 바다날씨</h4><div id="wxDaily"></div><div id="wxExtended"></div></div>
 </div>
 
-<div class="ft">Data: <a href="https://www.badatime.com/1443/tide">바다타임</a> · 3h 갱신 · <span id="utime"></span></div>
+<div class="ft">Data: <a id="ftLink" href="https://www.badatime.com/1443/tide">바다타임</a> · 3h 갱신 · <span id="utime"></span></div>
 
 <script>
 // ═══════════════════════════════════════════
 const today=new Date();
 let tideData=[],chart=null,selected=null,swData={};
+let allData={},updated='';
 
 function toMin(t){const[h,m]=t.split(':').map(Number);return h*60+m}
 
@@ -313,17 +322,33 @@ function selectDay(m,d){
 // ═══════════════════════════════════════════
 // Load
 // ═══════════════════════════════════════════
+function selectLocation(name){
+    const d=allData[name];if(!d)return;
+    tideData=d.tides||[];
+    swData=d.sea_weather||{};
+    document.getElementById('locName').textContent='⚓ '+name;
+    document.title=name+' 물때';
+    document.getElementById('ftLink').href='https://www.badatime.com/'+d.location_id+'/tide';
+    document.getElementById('temp').innerHTML=(d.sea_temp||'--')+'<u>°C</u>';
+    document.getElementById('utime').textContent='갱신: '+(updated||'').replace('T',' ').slice(5,16);
+    document.querySelectorAll('.locbtn').forEach(b=>b.classList.toggle('sel',b.textContent.includes(name)));
+    try{localStorage.setItem('loc',name)}catch(e){}
+    const m=today.getMonth()+1,d=today.getDate();
+    selectDay(m,d);
+}
+
 async function load(){
     try{
         const r=await fetch('tide_data.json?t='+Date.now());
         const data=await r.json();
-        tideData=data.tides||[];
-        document.getElementById('temp').innerHTML=(data.sea_temp||'--')+'<u>°C</u>';
-        document.getElementById('utime').textContent='갱신: '+(data.updated||'').replace('T',' ').slice(5,16);
-        const sw=data.sea_weather||{};
-        swData=sw;
-        const m=today.getMonth()+1,d=today.getDate();
-        selectDay(m,d);
+        const locs=data.locations||{};
+        const names=Object.keys(locs);
+        if(!names.length)return;
+        allData=locs;updated=data.updated||'';
+        document.getElementById('locbar').innerHTML=names.map(n=>
+            `<button class="locbtn${n===names[0]?' sel':''}" onclick="selectLocation('${n}')">⚓ ${n}</button>`).join('');
+        let cur=null;try{cur=localStorage.getItem('loc')}catch(e){}
+        selectLocation(names.includes(cur)?cur:names[0]);
     }catch(e){}
 }
 load();
