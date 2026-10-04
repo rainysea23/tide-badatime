@@ -140,45 +140,56 @@ let allData={},updated='';
 
 function toMin(t){const[h,m]=t.split(':').map(Number);return h*60+m}
 
-// ═══════════════════════════════════════════
-// Graph
-// ═══════════════════════════════════════════
-function buildGraph(td){
-    if(!td)return{labels:[],values:[],hts:[],lts:[]};
-    const events=[];
-    (td.manjo||[]).forEach(e=>events.push({...e,type:'H'}));
-    (td.ganjo||[]).forEach(e=>events.push({...e,type:'L'}));
-    events.sort((a,b)=>toMin(a.time)-toMin(b.time));
-    if(events.length<2)return{labels:[],values:[],hts:[],lts:[]};
+function dayOf(m,d){return tideData.find(t=>t.month===m&&t.day===d)}
 
-    const ext=[];
-    events.forEach(e=>{
-        ext.push({...e,absMin:toMin(e.time)-1440});
-        ext.push({...e,absMin:toMin(e.time)});
-        ext.push({...e,absMin:toMin(e.time)+1440});
-    });
-    ext.sort((a,b)=>a.absMin-b.absMin);
+// ═══════════════════════════════════════════
+// Graph (이전날~다음날 이벤트를 이어붙여 3개뿐인 날도 자연스럽게)
+// ═══════════════════════════════════════════
+function buildGraph(m,d){
+    const td=dayOf(m,d);
+    if(!td)return{labels:[],values:[],hts:[],lts:[]};
+    const base=new Date(today.getFullYear(),m-1,d);
+    const events=[];
+    const pushDay=(off,t)=>{
+        (t.manjo||[]).forEach(e=>events.push({...e,type:'H',absMin:off*1440+toMin(e.time)}));
+        (t.ganjo||[]).forEach(e=>events.push({...e,type:'L',absMin:off*1440+toMin(e.time)}));
+    };
+    const dayAt=off=>{
+        const dt=new Date(base.getFullYear(),base.getMonth(),base.getDate()+off);
+        return dayOf(dt.getMonth()+1,dt.getDate());
+    };
+    // 이웃날 데이터가 없으면(첫날/마지막날) 당일 이벤트 ±1440으로 경계 보강
+    pushDay(-1,dayAt(-1)||td);
+    pushDay(0,td);
+    pushDay(1,dayAt(1)||td);
+    events.sort((a,b)=>a.absMin-b.absMin);
+    if(events.length<2)return{labels:[],values:[],hts:[],lts:[]};
 
     const labels=[],values=[],hts=[],lts=[];
     for(let h=0;h<24;h++)for(let m=0;m<60;m+=15){
         const min=h*60+m;
         labels.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
-        let p=ext[0],n=ext[ext.length-1];
-        for(const e of ext){if(e.absMin<=min)p=e;if(e.absMin>min){n=e;break}}
-        const f=(min-p.absMin)/(n.absMin-p.absMin);
+        let p=events[0],n=events[events.length-1];
+        for(const e of events){if(e.absMin<=min)p=e;if(e.absMin>min){n=e;break}}
+        let f=(min-p.absMin)/(n.absMin-p.absMin);
+        f=Math.max(0,Math.min(1,f));
         const cf=(1-Math.cos(f*Math.PI))/2;
         values.push(Math.round(p.height+(n.height-p.height)*cf));
     }
+    // 선택일(0~1440) 이벤트만 마커로, 15분 라벨에 근사
     events.forEach(e=>{
-        const idx=labels.indexOf(e.time);
-        if(idx>=0)(e.type==='H'?hts:lts).push({idx,height:e.height});
+        if(e.absMin<0||e.absMin>=1440)return;
+        const idx=Math.round(e.absMin/15);
+        if(idx>=0&&idx<labels.length)(e.type==='H'?hts:lts).push({idx,height:e.height});
     });
     return{labels,values,hts,lts};
 }
 
-function renderGraph(td){
+function renderGraph(m,d){
     if(chart)chart.destroy();
-    const g=buildGraph(td);
+    const td=dayOf(m,d);
+    const g=buildGraph(m,d);
+    const sun=td?/^(\d{2}:\d{2})\s*(\d{2}:\d{2})$/.exec(td.sunrise_set||''):null;
     const ctx=document.getElementById('tideChart').getContext('2d');
     chart=new Chart(ctx,{
         type:'line',
@@ -209,6 +220,19 @@ function renderGraph(td){
                 c.ctx.fillStyle='#f97316';c.ctx.textAlign='center';
                 c.ctx.fillText('▼'+height,x,y+18);
             });
+            // 일출/일몰 세로선 + 라벨
+            if(sun){
+                sun.slice(1).forEach((t,i)=>{
+                    const idx=Math.round(toMin(t)/15);
+                    if(idx<0||idx>=g.values.length)return;
+                    const x=xa.getPixelForValue(idx);
+                    c.ctx.beginPath();c.ctx.moveTo(x,ya.top);c.ctx.lineTo(x,ya.bottom);
+                    c.ctx.strokeStyle='rgba(251,191,36,0.35)';c.ctx.setLineDash([2,3]);
+                    c.ctx.lineWidth=1;c.ctx.stroke();c.ctx.setLineDash([]);
+                    c.ctx.fillStyle='#fbbf24';c.ctx.font='bold 8px sans-serif';c.ctx.textAlign='center';
+                    c.ctx.fillText((i===0?'☀':'🌇')+t,x,ya.top+12);
+                });
+            }
             const now=new Date();
             if(td.month===now.getMonth()+1&&td.day===now.getDate()){
                 const curIdx=Math.round((now.getHours()*60+now.getMinutes())/15);
@@ -234,6 +258,10 @@ function renderGraph(td){
 // ═══════════════════════════════════════════
 function renderDetail(td){
     const flowBadge=td.flow_pct!=null?(td.flow_pct>=80?'강':td.flow_pct>=50?'중':'약'):'';
+    const sun=/^(\d{2}:\d{2})\s*(\d{2}:\d{2})$/.exec(td.sunrise_set||'');
+    const sunText=sun?`일출 ${sun[1]} · 일몰 ${sun[2]}`:(td.sunrise_set||'-');
+    const moon=/^(\d{2}:\d{2})\s*(\d{2}:\d{2})$/.exec(td.moonrise_set||'');
+    const moonText=moon?`월출 ${moon[1]} · 월몰 ${moon[2]}`:((td.moonrise_set||'').replace(/^----/,'월몰 ')||'-');
     const mj=(td.manjo||[]).map(x=>`<div class="tide-item"><span class="ti">${x.time}</span><span class="th">${x.height}cm</span><span class="tdiff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span></div>`).join('');
     const gj=(td.ganjo||[]).map(x=>`<div class="tide-item"><span class="ti">${x.time}</span><span class="th">${x.height}cm</span><span class="tdiff ${x.diff>0?'up':'down'}">${x.diff>0?'+':''}${x.diff||''}</span></div>`).join('');
 
@@ -251,8 +279,8 @@ function renderDetail(td){
             </div>
         </div>
         <div class="sunmoon">
-            <span>☀️ 일출몰 ${td.sunrise_set||'-'}</span>
-            <span>🌙 월출몰 ${td.moonrise_set||'-'}</span>
+            <span>☀️ ${sunText}</span>
+            <span>🌙 ${moonText}</span>
         </div>`;
 }
 
@@ -306,7 +334,7 @@ function selectDay(m,d){
     document.getElementById('tcls').textContent=td.tide_class+'물';
     document.getElementById('tsum').textContent=
         '만조 '+(td.manjo||[]).map(x=>x.time).join(', ')+' · 간조 '+(td.ganjo||[]).map(x=>x.time).join(', ');
-    renderGraph(td);
+    renderGraph(m,d);
     renderDetail(td);
     renderWeather(swData,m,d);
     // Chips
