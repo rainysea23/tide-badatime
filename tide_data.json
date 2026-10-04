@@ -1,9 +1,9 @@
 {
-  "updated": "2026-10-04T13:19:31.131061+09:00",
+  "updated": "2026-10-04T20:46:57.510695+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
-      "sea_temp": null,
+      "sea_temp": 22.8,
       "sea_weather": {
         "area": "충남남부앞바다",
         "daily": [
@@ -19,8 +19,8 @@
               },
               {
                 "when": "오후",
-                "weather": "흐리고한때비",
-                "wind_dir": "남서-서",
+                "weather": "흐리고가끔비",
+                "wind_dir": "서-북서",
                 "wind_speed": "5-9",
                 "wave": "0.5-1.5"
               }
@@ -59,7 +59,7 @@
                 "when": "오후",
                 "weather": "맑음",
                 "wind_dir": "북서-북",
-                "wind_speed": "4-9",
+                "wind_speed": "4-8",
                 "wave": "0.5-1.0"
               }
             ]
@@ -79,8 +79,8 @@
             "1-1",
             "1-1",
             "1-1",
-            "1-2",
-            "1-2"
+            "1-1",
+            "1-1"
           ]
         ],
         "hourly_labels": [],
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 20.8,
+      "sea_temp": null,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -637,8 +637,8 @@
               },
               {
                 "when": "오후",
-                "weather": "구름많고한때비",
-                "wind_dir": "남서-서",
+                "weather": "흐리고한때비",
+                "wind_dir": "서-북서",
                 "wind_speed": "5-12",
                 "wave": "0.5-2.0"
               }
@@ -650,7 +650,7 @@
               {
                 "when": "오전",
                 "weather": "구름많고한때비",
-                "wind_dir": "북서-북",
+                "wind_dir": "서-북서",
                 "wind_speed": "6-13",
                 "wave": "1.0-2.5"
               },
@@ -697,8 +697,8 @@
             "1-1",
             "1-1",
             "1-1",
-            "1-2",
-            "1-2"
+            "1-1",
+            "1-1"
           ]
         ],
         "hourly_labels": [],
