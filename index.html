@@ -198,27 +198,27 @@ function renderGraph(m,d){
             responsive:true,maintainAspectRatio:false,
             plugins:{legend:{display:false}},
             scales:{
-                x:{ticks:{color:'#475569',maxTicksLimit:8,font:{size:9}},grid:{color:'rgba(71,85,105,0.15)'}},
-                y:{ticks:{color:'#475569',callback:v=>v+'cm',font:{size:9}},grid:{color:'rgba(71,85,105,0.15)'}},
+                x:{ticks:{color:'#475569',maxTicksLimit:8,font:{size:10}},grid:{color:'rgba(71,85,105,0.15)'}},
+                y:{ticks:{color:'#475569',callback:v=>v+'cm',font:{size:10}},grid:{color:'rgba(71,85,105,0.15)'}},
             },
             interaction:{intersect:false,mode:'index'},
         },
         plugins:[{id:'m',afterDraw(c){
             const xa=c.scales.x,ya=c.scales.y;
-            c.ctx.font='bold 9px sans-serif';
+            c.ctx.font='bold 12px sans-serif';
             g.hts.forEach(({idx,height})=>{
                 const x=xa.getPixelForValue(idx),y=ya.getPixelForValue(height);
-                c.ctx.beginPath();c.ctx.arc(x,y,4,0,Math.PI*2);
+                c.ctx.beginPath();c.ctx.arc(x,y,5,0,Math.PI*2);
                 c.ctx.fillStyle='#60a5fa';c.ctx.fill();
                 c.ctx.fillStyle='#60a5fa';c.ctx.textAlign='center';
-                c.ctx.fillText('▲'+height,x,y-10);
+                c.ctx.fillText('▲'+height,x,y-13);
             });
             g.lts.forEach(({idx,height})=>{
                 const x=xa.getPixelForValue(idx),y=ya.getPixelForValue(height);
-                c.ctx.beginPath();c.ctx.arc(x,y,4,0,Math.PI*2);
+                c.ctx.beginPath();c.ctx.arc(x,y,5,0,Math.PI*2);
                 c.ctx.fillStyle='#f97316';c.ctx.fill();
                 c.ctx.fillStyle='#f97316';c.ctx.textAlign='center';
-                c.ctx.fillText('▼'+height,x,y+18);
+                c.ctx.fillText('▼'+height,x,y+22);
             });
             // 일출/일몰 세로선 + 라벨
             if(sun){
@@ -229,8 +229,8 @@ function renderGraph(m,d){
                     c.ctx.beginPath();c.ctx.moveTo(x,ya.top);c.ctx.lineTo(x,ya.bottom);
                     c.ctx.strokeStyle='rgba(251,191,36,0.35)';c.ctx.setLineDash([2,3]);
                     c.ctx.lineWidth=1;c.ctx.stroke();c.ctx.setLineDash([]);
-                    c.ctx.fillStyle='#fbbf24';c.ctx.font='bold 8px sans-serif';c.ctx.textAlign='center';
-                    c.ctx.fillText((i===0?'☀':'🌇')+t,x,ya.top+12);
+                    c.ctx.fillStyle='#fbbf24';c.ctx.font='bold 12px sans-serif';c.ctx.textAlign='center';
+                    c.ctx.fillText((i===0?'☀':'🌇')+t,x,ya.top+14);
                 });
             }
             const now=new Date();
@@ -245,7 +245,7 @@ function renderGraph(m,d){
                     c.ctx.fillStyle='#fff';c.ctx.fill();
                     c.ctx.beginPath();c.ctx.arc(cx,cy,3,0,Math.PI*2);
                     c.ctx.fillStyle='#f97316';c.ctx.fill();
-                    c.ctx.font='bold 9px sans-serif';c.ctx.fillStyle='#fff';c.ctx.textAlign='left';
+                    c.ctx.font='bold 12px sans-serif';c.ctx.fillStyle='#fff';c.ctx.textAlign='left';
                     c.ctx.fillText('현재 '+g.values[curIdx]+'cm',cx+8,cy-4);
                 }
             }
