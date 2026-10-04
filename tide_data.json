@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T01:27:53.755261+09:00",
+  "updated": "2026-10-05T05:51:47.406972+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -21,8 +21,8 @@
                 "when": "오후",
                 "weather": "구름많음",
                 "wind_dir": "북서-북",
-                "wind_speed": "6-12",
-                "wave": "1.0-2.5"
+                "wind_speed": "7-15",
+                "wave": "1.0-3.0"
               }
             ]
           },
@@ -33,15 +33,34 @@
                 "when": "오전",
                 "weather": "맑음",
                 "wind_dir": "북서-북",
-                "wind_speed": "5-10",
-                "wave": "0.5-2.0"
+                "wind_speed": "7-15",
+                "wave": "1.0-3.0"
               },
               {
                 "when": "오후",
                 "weather": "맑음",
                 "wind_dir": "북서-북",
-                "wind_speed": "4-8",
+                "wind_speed": "4-9",
+                "wave": "1.0-1.5"
+              }
+            ]
+          },
+          {
+            "date": "10.7(수)",
+            "times": [
+              {
+                "when": "오전",
+                "weather": "맑음",
+                "wind_dir": "북-북동",
+                "wind_speed": "3-8",
                 "wave": "0.5-1.0"
+              },
+              {
+                "when": "오후",
+                "weather": "맑음",
+                "wind_dir": "북-북동",
+                "wind_speed": "3-6",
+                "wave": "0.5-0.5"
               }
             ]
           }
@@ -53,8 +72,7 @@
             "맑음",
             "맑음",
             "맑음",
-            "맑음",
-            ""
+            "구름많음"
           ],
           [
             "파고",
@@ -62,8 +80,7 @@
             "1-1",
             "1-1",
             "1-1",
-            "1-1",
-            ""
+            "1-2"
           ]
         ],
         "hourly_labels": [],
@@ -350,7 +367,7 @@
           "sunrise_set": "06:3918:04",
           "moonrise_set": "08:0718:33",
           "moon_img": 2,
-          "weather_img": "",
+          "weather_img": "//images.badatime.com/weather/3.png",
           "month": 10
         },
         {
@@ -604,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": null,
+      "sea_temp": 20.4,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -614,7 +631,7 @@
               {
                 "when": "오전",
                 "weather": "구름많고한때비",
-                "wind_dir": "서-북서",
+                "wind_dir": "북서-북",
                 "wind_speed": "6-13",
                 "wave": "1.0-2.5"
               },
@@ -640,9 +657,28 @@
               {
                 "when": "오후",
                 "weather": "맑음",
-                "wind_dir": "북서-북",
+                "wind_dir": "서-북서",
                 "wind_speed": "4-8",
                 "wave": "0.5-1.0"
+              }
+            ]
+          },
+          {
+            "date": "10.7(수)",
+            "times": [
+              {
+                "when": "오전",
+                "weather": "맑음",
+                "wind_dir": "북-북동",
+                "wind_speed": "3-7",
+                "wave": "0.5-0.5"
+              },
+              {
+                "when": "오후",
+                "weather": "맑음",
+                "wind_dir": "북-북동",
+                "wind_speed": "3-6",
+                "wave": "0.5-0.5"
               }
             ]
           }
@@ -654,8 +690,7 @@
             "맑음",
             "맑음",
             "맑음",
-            "맑음",
-            ""
+            "구름많음"
           ],
           [
             "파고",
@@ -663,8 +698,7 @@
             "1-1",
             "1-1",
             "1-1",
-            "1-1",
-            ""
+            "1-2"
           ]
         ],
         "hourly_labels": [],
@@ -946,7 +980,7 @@
           "sunrise_set": "06:3918:03",
           "moonrise_set": "08:0918:31",
           "moon_img": 2,
-          "weather_img": "",
+          "weather_img": "//images.badatime.com/weather/3.png",
           "month": 10
         },
         {
