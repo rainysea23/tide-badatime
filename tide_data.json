@@ -1,9 +1,9 @@
 {
-  "updated": "2026-10-05T13:03:51.804616+09:00",
+  "updated": "2026-10-05T22:36:27.129563+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
-      "sea_temp": 22.6,
+      "sea_temp": 22.4,
       "sea_weather": {
         "area": "충남남부앞바다",
         "daily": [
@@ -19,7 +19,7 @@
               },
               {
                 "when": "오후",
-                "weather": "구름많음",
+                "weather": "맑음",
                 "wind_dir": "북서-북",
                 "wind_speed": "7-15",
                 "wave": "1.0-3.0"
@@ -33,15 +33,15 @@
                 "when": "오전",
                 "weather": "맑음",
                 "wind_dir": "북서-북",
-                "wind_speed": "7-15",
-                "wave": "1.0-3.0"
+                "wind_speed": "5-11",
+                "wave": "1.0-2.0"
               },
               {
                 "when": "오후",
                 "weather": "맑음",
                 "wind_dir": "북서-북",
                 "wind_speed": "4-9",
-                "wave": "1.0-1.5"
+                "wave": "0.5-1.0"
               }
             ]
           },
@@ -52,15 +52,15 @@
                 "when": "오전",
                 "weather": "맑음",
                 "wind_dir": "북-북동",
-                "wind_speed": "3-8",
+                "wind_speed": "4-9",
                 "wave": "0.5-1.0"
               },
               {
                 "when": "오후",
                 "weather": "맑음",
-                "wind_dir": "북-북동",
-                "wind_speed": "3-6",
-                "wave": "0.5-0.5"
+                "wind_dir": "북서-북",
+                "wind_speed": "3-8",
+                "wave": "0.5-1.0"
               }
             ]
           }
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 20.7,
+      "sea_temp": 20.6,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -669,14 +669,14 @@
               {
                 "when": "오전",
                 "weather": "맑음",
-                "wind_dir": "북-북동",
+                "wind_dir": "북서-북",
                 "wind_speed": "3-7",
                 "wave": "0.5-0.5"
               },
               {
                 "when": "오후",
                 "weather": "맑음",
-                "wind_dir": "북-북동",
+                "wind_dir": "서-북서",
                 "wind_speed": "3-6",
                 "wave": "0.5-0.5"
               }
