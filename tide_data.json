@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-12T09:13:17.614139+09:00",
+  "updated": "2026-10-12T19:13:09.625742+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -68,18 +68,18 @@
         "extended": [
           [
             "날씨",
-            "맑음",
-            "맑음",
+            "차차흐려짐",
+            "차차흐려짐",
             "차차흐려짐",
             "비",
-            "흐림"
+            "구름많음"
           ],
           [
             "파고",
             "1-2",
+            "1-1",
             "1-2",
-            "1-2",
-            "1-2",
+            "1-3",
             "1-2"
           ]
         ],
@@ -223,7 +223,7 @@
           "sunrise_set": "06:4218:00",
           "moonrise_set": "11:1320:30",
           "moon_img": 5,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/6.png",
           "month": 10
         },
         {
@@ -259,7 +259,7 @@
           "sunrise_set": "06:4317:58",
           "moonrise_set": "12:0721:21",
           "moon_img": 6,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/6.png",
           "month": 10
         },
         {
@@ -367,7 +367,7 @@
           "sunrise_set": "06:4517:54",
           "moonrise_set": "14:12----",
           "moon_img": 9,
-          "weather_img": "//images.badatime.com/weather/4.png",
+          "weather_img": "//images.badatime.com/weather/3.png",
           "month": 10
         },
         {
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 21.1,
+      "sea_temp": 21.8,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -638,7 +638,7 @@
               {
                 "when": "오후",
                 "weather": "구름많고한때비",
-                "wind_dir": "동-남동",
+                "wind_dir": "서-북서",
                 "wind_speed": "2-5",
                 "wave": "0.5-0.5"
               }
@@ -649,7 +649,7 @@
             "times": [
               {
                 "when": "오전",
-                "weather": "흐리고한때비",
+                "weather": "흐리고가끔비",
                 "wind_dir": "북서-북",
                 "wind_speed": "3-8",
                 "wave": "0.5-1.0"
@@ -686,18 +686,18 @@
         "extended": [
           [
             "날씨",
-            "맑음",
-            "맑음",
+            "차차흐려짐",
+            "차차흐려짐",
             "차차흐려짐",
             "비",
-            "흐림"
+            "구름많음"
           ],
           [
             "파고",
             "1-2",
+            "1-1",
             "1-2",
-            "1-2",
-            "1-2",
+            "1-3",
             "1-2"
           ]
         ],
@@ -841,7 +841,7 @@
           "sunrise_set": "06:4217:58",
           "moonrise_set": "11:1620:27",
           "moon_img": 5,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/6.png",
           "month": 10
         },
         {
@@ -877,7 +877,7 @@
           "sunrise_set": "06:4317:57",
           "moonrise_set": "12:1021:18",
           "moon_img": 6,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/6.png",
           "month": 10
         },
         {
@@ -985,7 +985,7 @@
           "sunrise_set": "06:4617:53",
           "moonrise_set": "14:14----",
           "moon_img": 9,
-          "weather_img": "//images.badatime.com/weather/4.png",
+          "weather_img": "//images.badatime.com/weather/3.png",
           "month": 10
         },
         {
