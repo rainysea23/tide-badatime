@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14T17:23:18.752145+09:00",
+  "updated": "2026-10-14T23:19:26.376432+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -40,8 +40,8 @@
                 "when": "오후",
                 "weather": "구름많음",
                 "wind_dir": "남-남서",
-                "wind_speed": "4-8",
-                "wave": "0.5-0.5"
+                "wind_speed": "5-10",
+                "wave": "0.5-1.5"
               }
             ]
           },
@@ -80,7 +80,7 @@
             "1-3",
             "1-2",
             "1-2",
-            "1-2"
+            "1-3"
           ]
         ],
         "hourly_labels": [],
@@ -127,25 +127,25 @@
           "manjo": [
             {
               "time": "05:35",
-              "height": 556,
-              "diff": 411
+              "height": 557,
+              "diff": 413
             },
             {
               "time": "18:08",
-              "height": 612,
-              "diff": 530
+              "height": 613,
+              "diff": 532
             }
           ],
           "ganjo": [
             {
               "time": "00:05",
-              "height": 145,
-              "diff": -505
+              "height": 144,
+              "diff": -506
             },
             {
               "time": "11:56",
-              "height": 82,
-              "diff": -474
+              "height": 81,
+              "diff": -476
             }
           ],
           "sunrise_set": "06:4218:00",
@@ -164,7 +164,7 @@
             {
               "time": "06:06",
               "height": 525,
-              "diff": 345
+              "diff": 346
             },
             {
               "time": "18:44",
@@ -175,8 +175,8 @@
           "ganjo": [
             {
               "time": "00:36",
-              "height": 180,
-              "diff": -444
+              "height": 179,
+              "diff": -445
             },
             {
               "time": "12:24",
@@ -205,7 +205,7 @@
             {
               "time": "19:26",
               "height": 541,
-              "diff": 398
+              "diff": 399
             }
           ],
           "ganjo": [
@@ -216,8 +216,8 @@
             },
             {
               "time": "12:57",
-              "height": 143,
-              "diff": -347
+              "height": 142,
+              "diff": -348
             }
           ],
           "sunrise_set": "06:4317:57",
@@ -235,13 +235,13 @@
           "manjo": [
             {
               "time": "07:21",
-              "height": 451,
-              "diff": 195
+              "height": 452,
+              "diff": 196
             },
             {
               "time": "20:22",
-              "height": 501,
-              "diff": 319
+              "height": 502,
+              "diff": 321
             }
           ],
           "ganjo": [
@@ -252,8 +252,8 @@
             },
             {
               "time": "13:38",
-              "height": 182,
-              "diff": -269
+              "height": 181,
+              "diff": -271
             }
           ],
           "sunrise_set": "06:4417:56",
@@ -271,8 +271,8 @@
           "manjo": [
             {
               "time": "08:23",
-              "height": 414,
-              "diff": 125
+              "height": 415,
+              "diff": 127
             },
             {
               "time": "21:48",
@@ -283,13 +283,13 @@
           "ganjo": [
             {
               "time": "02:51",
-              "height": 289,
-              "diff": -222
+              "height": 288,
+              "diff": -223
             },
             {
               "time": "14:41",
               "height": 221,
-              "diff": -193
+              "diff": -194
             }
           ],
           "sunrise_set": "06:4517:54",
@@ -308,24 +308,24 @@
             {
               "time": "10:11",
               "height": 398,
-              "diff": 100
+              "diff": 101
             },
             {
               "time": "23:30",
               "height": 475,
-              "diff": 234
+              "diff": 235
             }
           ],
           "ganjo": [
             {
               "time": "04:40",
-              "height": 298,
-              "diff": -183
+              "height": 297,
+              "diff": -184
             },
             {
               "time": "16:26",
-              "height": 241,
-              "diff": -157
+              "height": 240,
+              "diff": -158
             }
           ],
           "sunrise_set": "06:4617:53",
@@ -374,8 +374,8 @@
           "manjo": [
             {
               "time": "00:40",
-              "height": 503,
-              "diff": 281
+              "height": 504,
+              "diff": 282
             },
             {
               "time": "13:02",
@@ -387,7 +387,7 @@
             {
               "time": "07:18",
               "height": 212,
-              "diff": -291
+              "diff": -292
             },
             {
               "time": "19:20",
@@ -427,8 +427,8 @@
             },
             {
               "time": "20:10",
-              "height": 133,
-              "diff": -403
+              "height": 132,
+              "diff": -404
             }
           ],
           "sunrise_set": "06:4917:49",
@@ -446,8 +446,8 @@
           "manjo": [
             {
               "time": "02:03",
-              "height": 566,
-              "diff": 432
+              "height": 567,
+              "diff": 433
             },
             {
               "time": "14:25",
@@ -459,12 +459,12 @@
             {
               "time": "08:33",
               "height": 106,
-              "diff": -460
+              "diff": -461
             },
             {
               "time": "20:53",
-              "height": 98,
-              "diff": -492
+              "height": 97,
+              "diff": -493
             }
           ],
           "sunrise_set": "06:5017:48",
@@ -518,25 +518,25 @@
           "manjo": [
             {
               "time": "03:08",
-              "height": 603,
-              "diff": 529
+              "height": 604,
+              "diff": 530
             },
             {
               "time": "15:34",
-              "height": 667,
-              "diff": 636
+              "height": 668,
+              "diff": 637
             }
           ],
           "ganjo": [
             {
               "time": "09:42",
               "height": 31,
-              "diff": -572
+              "diff": -573
             },
             {
               "time": "22:13",
               "height": 64,
-              "diff": -603
+              "diff": -604
             }
           ],
           "sunrise_set": "06:5217:46",
@@ -554,8 +554,8 @@
           "manjo": [
             {
               "time": "03:41",
-              "height": 607,
-              "diff": 543
+              "height": 608,
+              "diff": 544
             },
             {
               "time": "16:11",
@@ -567,7 +567,7 @@
             {
               "time": "10:16",
               "height": 11,
-              "diff": -596
+              "diff": -597
             },
             {
               "time": "22:53",
@@ -590,25 +590,25 @@
           "manjo": [
             {
               "time": "04:16",
-              "height": 602,
-              "diff": 534
+              "height": 603,
+              "diff": 535
             },
             {
               "time": "16:50",
               "height": 690,
-              "diff": 684
+              "diff": 685
             }
           ],
           "ganjo": [
             {
               "time": "10:52",
-              "height": 6,
-              "diff": -596
+              "height": 5,
+              "diff": -598
             },
             {
               "time": "23:33",
-              "height": 85,
-              "diff": -605
+              "height": 84,
+              "diff": -606
             }
           ],
           "sunrise_set": "06:5417:44",
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 20.7,
+      "sea_temp": 19.7,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -649,17 +649,17 @@
             "times": [
               {
                 "when": "오전",
-                "weather": "맑음",
+                "weather": "구름많고한때비",
                 "wind_dir": "남서-서",
-                "wind_speed": "5-10",
+                "wind_speed": "5-11",
                 "wave": "0.5-1.5"
               },
               {
                 "when": "오후",
                 "weather": "구름많음",
                 "wind_dir": "남서-서",
-                "wind_speed": "5-10",
-                "wave": "0.5-1.5"
+                "wind_speed": "6-12",
+                "wave": "0.5-2.5"
               }
             ]
           },
@@ -670,15 +670,15 @@
                 "when": "오전",
                 "weather": "구름많음",
                 "wind_dir": "남동-남",
-                "wind_speed": "3-6",
-                "wave": "0.5-1.0"
+                "wind_speed": "3-7",
+                "wave": "0.5-1.5"
               },
               {
                 "when": "오후",
                 "weather": "구름많음",
-                "wind_dir": "북동-동",
+                "wind_dir": "동-남동",
                 "wind_speed": "2-5",
-                "wave": "0.5-0.5"
+                "wave": "0.5-1.0"
               }
             ]
           }
@@ -698,7 +698,7 @@
             "1-3",
             "1-2",
             "1-2",
-            "1-2"
+            "1-3"
           ]
         ],
         "hourly_labels": [],
@@ -774,7 +774,7 @@
           "sunrise_set": "06:4217:58",
           "moonrise_set": "11:1620:27",
           "moon_img": 5,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/13.png",
           "month": 10
         },
         {
