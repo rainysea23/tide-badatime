@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T05:55:23.537182+09:00",
+  "updated": "2026-10-16T08:32:20.836348+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": null,
+      "sea_temp": 20.4,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
