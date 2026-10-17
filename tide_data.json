@@ -1,9 +1,9 @@
 {
-  "updated": "2026-10-17T08:14:17.034278+09:00",
+  "updated": "2026-10-17T11:59:36.159678+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
-      "sea_temp": null,
+      "sea_temp": 21.1,
       "sea_weather": {
         "area": "충남남부앞바다",
         "daily": [
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 20.3,
+      "sea_temp": 19.9,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -640,7 +640,7 @@
                 "weather": "구름많음",
                 "wind_dir": "남동-남",
                 "wind_speed": "5-12",
-                "wave": "0.5-2.0"
+                "wave": "1.0-2.0"
               }
             ]
           },
@@ -652,14 +652,14 @@
                 "weather": "흐리고한때비",
                 "wind_dir": "남동-남",
                 "wind_speed": "8-16",
-                "wave": "1.0-3.0"
+                "wave": "1.5-3.5"
               },
               {
                 "when": "오후",
                 "weather": "흐리고한때비",
                 "wind_dir": "북서-북",
                 "wind_speed": "7-15",
-                "wave": "1.0-2.5"
+                "wave": "1.0-3.0"
               }
             ]
           },
@@ -671,7 +671,7 @@
                 "weather": "맑음",
                 "wind_dir": "북서-북",
                 "wind_speed": "5-11",
-                "wave": "0.5-1.5"
+                "wave": "0.5-2.0"
               },
               {
                 "when": "오후",
