@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T07:45:47.415769+09:00",
+  "updated": "2026-10-19T12:15:51.884412+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 19.7,
+      "sea_temp": 19.5,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -639,7 +639,7 @@
                 "when": "오후",
                 "weather": "구름많음",
                 "wind_dir": "북-북동",
-                "wind_speed": "4-8",
+                "wind_speed": "4-7",
                 "wave": "0.5-1.0"
               }
             ]
@@ -675,7 +675,7 @@
               },
               {
                 "when": "오후",
-                "weather": "맑음",
+                "weather": "구름많음",
                 "wind_dir": "북서-북",
                 "wind_speed": "6-15",
                 "wave": "1.0-3.0"
