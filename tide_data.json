@@ -1,9 +1,9 @@
 {
-  "updated": "2026-10-19T12:15:51.884412+09:00",
+  "updated": "2026-10-19T21:07:53.498391+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
-      "sea_temp": 20.8,
+      "sea_temp": 20.9,
       "sea_weather": {
         "area": "충남남부앞바다",
         "daily": [
@@ -68,8 +68,8 @@
         "extended": [
           [
             "날씨",
-            "맑음",
-            "맑음",
+            "흐린후갬",
+            "흐린후갬",
             "맑음",
             "맑음",
             "맑음"
@@ -77,7 +77,7 @@
           [
             "파고",
             "1-2",
-            "1-2",
+            "1-1",
             "1-2",
             "1-2",
             "1-2"
@@ -223,7 +223,7 @@
           "sunrise_set": "06:4817:51",
           "moonrise_set": "15:3702:20",
           "moon_img": 12,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/5.png",
           "month": 10
         },
         {
@@ -259,7 +259,7 @@
           "sunrise_set": "06:4917:49",
           "moonrise_set": "16:0203:23",
           "moon_img": 13,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/5.png",
           "month": 10
         },
         {
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 19.5,
+      "sea_temp": 19.7,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -668,7 +668,7 @@
             "times": [
               {
                 "when": "오전",
-                "weather": "구름많음",
+                "weather": "구름많고한때비",
                 "wind_dir": "북서-북",
                 "wind_speed": "5-15",
                 "wave": "1.0-3.0"
@@ -686,8 +686,8 @@
         "extended": [
           [
             "날씨",
-            "맑음",
-            "맑음",
+            "흐린후갬",
+            "흐린후갬",
             "맑음",
             "맑음",
             "맑음"
@@ -695,7 +695,7 @@
           [
             "파고",
             "1-2",
-            "1-2",
+            "1-1",
             "1-2",
             "1-2",
             "1-2"
@@ -805,7 +805,7 @@
           "sunrise_set": "06:4817:51",
           "moonrise_set": "15:1201:17",
           "moon_img": 11,
-          "weather_img": "//images.badatime.com/weather/3.png",
+          "weather_img": "//images.badatime.com/weather/13.png",
           "month": 10
         },
         {
@@ -841,7 +841,7 @@
           "sunrise_set": "06:4917:49",
           "moonrise_set": "15:3702:19",
           "moon_img": 12,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/5.png",
           "month": 10
         },
         {
@@ -877,7 +877,7 @@
           "sunrise_set": "06:5017:48",
           "moonrise_set": "16:0103:22",
           "moon_img": 13,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/5.png",
           "month": 10
         },
         {
