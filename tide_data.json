@@ -1,31 +1,12 @@
 {
-  "updated": "2026-10-29T18:19:27.883840+09:00",
+  "updated": "2026-10-30T03:00:58.040284+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
-      "sea_temp": 18.2,
+      "sea_temp": null,
       "sea_weather": {
         "area": "충남남부앞바다",
         "daily": [
-          {
-            "date": "10.29(목)",
-            "times": [
-              {
-                "when": "오전",
-                "weather": "구름많음",
-                "wind_dir": "남동-남",
-                "wind_speed": "4-7",
-                "wave": "0.5-0.5"
-              },
-              {
-                "when": "오후",
-                "weather": "흐리고비",
-                "wind_dir": "남-남서",
-                "wind_speed": "5-12",
-                "wave": "0.5-2.0"
-              }
-            ]
-          },
           {
             "date": "10.30(금)",
             "times": [
@@ -68,56 +49,27 @@
         "extended": [
           [
             "날씨",
-            "흐려져비",
+            "비",
             "흐린후갬",
-            "구름많음",
             "맑음",
-            "맑음"
+            "맑음",
+            "구름많음",
+            ""
           ],
           [
             "파고",
             "1-2",
-            "1-3",
             "1-2",
             "1-2",
-            "1-2"
+            "1-2",
+            "1-2",
+            ""
           ]
         ],
         "hourly_labels": [],
         "hourly_data": {}
       },
       "tides": [
-        {
-          "day": 29,
-          "dow": "목",
-          "lunar": "9.19",
-          "tide_class": "10",
-          "flow_pct": 94,
-          "manjo": [
-            {
-              "time": "04:54",
-              "height": 586,
-              "diff": 501
-            },
-            {
-              "time": "17:33",
-              "height": 677,
-              "diff": 663
-            }
-          ],
-          "ganjo": [
-            {
-              "time": "11:30",
-              "height": 14,
-              "diff": -572
-            }
-          ],
-          "sunrise_set": "06:5517:42",
-          "moonrise_set": "19:5110:26",
-          "moon_img": 19,
-          "weather_img": "//images.badatime.com/weather/3.png",
-          "month": 10
-        },
         {
           "day": 30,
           "dow": "금",
@@ -223,7 +175,7 @@
           "sunrise_set": "06:5817:39",
           "moonrise_set": "23:2313:14",
           "moon_img": 22,
-          "weather_img": "//images.badatime.com/weather/7.png",
+          "weather_img": "//images.badatime.com/weather/10.png",
           "month": 11
         },
         {
@@ -295,7 +247,7 @@
           "sunrise_set": "07:0017:37",
           "moonrise_set": "00:3314:22",
           "moon_img": 24,
-          "weather_img": "//images.badatime.com/weather/3.png",
+          "weather_img": "//images.badatime.com/weather/1.png",
           "month": 11
         },
         {
@@ -362,7 +314,7 @@
           "sunrise_set": "07:0217:35",
           "moonrise_set": "02:4615:15",
           "moon_img": 26,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/3.png",
           "month": 11
         },
         {
@@ -616,34 +568,46 @@
           "moon_img": 4,
           "weather_img": "",
           "month": 11
+        },
+        {
+          "day": 13,
+          "dow": "금",
+          "lunar": "10.5",
+          "tide_class": "11",
+          "flow_pct": 62,
+          "manjo": [
+            {
+              "time": "05:17",
+              "height": 520,
+              "diff": 367
+            },
+            {
+              "time": "17:50",
+              "height": 601,
+              "diff": 525
+            }
+          ],
+          "ganjo": [
+            {
+              "time": "11:33",
+              "height": 76,
+              "diff": -444
+            }
+          ],
+          "sunrise_set": "07:1017:29",
+          "moonrise_set": "10:4920:08",
+          "moon_img": 5,
+          "weather_img": "",
+          "month": 11
         }
       ]
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": null,
+      "sea_temp": 15.8,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
-          {
-            "date": "10.29(목)",
-            "times": [
-              {
-                "when": "오전",
-                "weather": "흐리고한때비",
-                "wind_dir": "남-남서",
-                "wind_speed": "4-10",
-                "wave": "0.5-1.5"
-              },
-              {
-                "when": "오후",
-                "weather": "흐리고한때비",
-                "wind_dir": "남서-서",
-                "wind_speed": "4-10",
-                "wave": "0.5-1.5"
-              }
-            ]
-          },
           {
             "date": "10.30(금)",
             "times": [
@@ -686,61 +650,27 @@
         "extended": [
           [
             "날씨",
-            "흐려져비",
+            "비",
             "흐린후갬",
-            "구름많음",
             "맑음",
-            "맑음"
+            "맑음",
+            "구름많음",
+            ""
           ],
           [
             "파고",
             "1-2",
-            "1-3",
             "1-2",
             "1-2",
-            "1-2"
+            "1-2",
+            "1-2",
+            ""
           ]
         ],
         "hourly_labels": [],
         "hourly_data": {}
       },
       "tides": [
-        {
-          "day": 29,
-          "dow": "목",
-          "lunar": "9.19",
-          "tide_class": "10",
-          "flow_pct": 94,
-          "manjo": [
-            {
-              "time": "06:12",
-              "height": 734,
-              "diff": 637
-            },
-            {
-              "time": "18:45",
-              "height": 829,
-              "diff": 814
-            }
-          ],
-          "ganjo": [
-            {
-              "time": "00:29",
-              "height": 97,
-              "diff": -749
-            },
-            {
-              "time": "12:29",
-              "height": 15,
-              "diff": -719
-            }
-          ],
-          "sunrise_set": "06:5617:41",
-          "moonrise_set": "19:4810:29",
-          "moon_img": 19,
-          "weather_img": "//images.badatime.com/weather/10.png",
-          "month": 10
-        },
         {
           "day": 30,
           "dow": "금",
@@ -846,7 +776,7 @@
           "sunrise_set": "06:5917:38",
           "moonrise_set": "23:2113:16",
           "moon_img": 22,
-          "weather_img": "//images.badatime.com/weather/7.png",
+          "weather_img": "//images.badatime.com/weather/10.png",
           "month": 11
         },
         {
@@ -913,7 +843,7 @@
           "sunrise_set": "07:0117:36",
           "moonrise_set": "00:3214:22",
           "moon_img": 24,
-          "weather_img": "//images.badatime.com/weather/3.png",
+          "weather_img": "//images.badatime.com/weather/1.png",
           "month": 11
         },
         {
@@ -985,7 +915,7 @@
           "sunrise_set": "07:0317:34",
           "moonrise_set": "02:4615:14",
           "moon_img": 26,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/3.png",
           "month": 11
         },
         {
@@ -1232,6 +1162,42 @@
           "sunrise_set": "07:1017:27",
           "moonrise_set": "10:0119:11",
           "moon_img": 4,
+          "weather_img": "",
+          "month": 11
+        },
+        {
+          "day": 13,
+          "dow": "금",
+          "lunar": "10.5",
+          "tide_class": "11",
+          "flow_pct": 62,
+          "manjo": [
+            {
+              "time": "06:23",
+              "height": 655,
+              "diff": 476
+            },
+            {
+              "time": "18:49",
+              "height": 739,
+              "diff": 648
+            }
+          ],
+          "ganjo": [
+            {
+              "time": "00:43",
+              "height": 179,
+              "diff": -580
+            },
+            {
+              "time": "12:30",
+              "height": 91,
+              "diff": -564
+            }
+          ],
+          "sunrise_set": "07:1117:27",
+          "moonrise_set": "10:5220:05",
+          "moon_img": 5,
           "weather_img": "",
           "month": 11
         }
