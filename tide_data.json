@@ -1,9 +1,9 @@
 {
-  "updated": "2026-11-01T08:59:14.886260+09:00",
+  "updated": "2026-11-01T14:47:46.879839+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
-      "sea_temp": 17.9,
+      "sea_temp": 17.7,
       "sea_weather": {
         "area": "충남남부앞바다",
         "daily": [
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 17.4,
+      "sea_temp": 15.5,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
