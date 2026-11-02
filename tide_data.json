@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T09:12:52.506336+09:00",
+  "updated": "2026-11-02T19:31:43.555333+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -71,13 +71,13 @@
             "비",
             "흐린후갬",
             "맑음",
-            "맑음",
+            "흐린후갬",
             "맑음"
           ],
           [
             "파고",
             "1-2",
-            "1-3",
+            "1-2",
             "1-3",
             "1-2",
             "1-2"
@@ -331,7 +331,7 @@
           "sunrise_set": "07:0517:33",
           "moonrise_set": "05:5616:33",
           "moon_img": 29,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/5.png",
           "month": 11
         },
         {
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": 16.8,
+      "sea_temp": 16.1,
       "sea_weather": {
         "area": "경기남부앞바다",
         "daily": [
@@ -649,10 +649,10 @@
             "times": [
               {
                 "when": "오전",
-                "weather": "맑음",
+                "weather": "구름많고한때비",
                 "wind_dir": "동-남동",
                 "wind_speed": "3-8",
-                "wave": "0.5-0.5"
+                "wave": "0.5-1.0"
               },
               {
                 "when": "오후",
@@ -689,13 +689,13 @@
             "비",
             "흐린후갬",
             "맑음",
-            "맑음",
+            "흐린후갬",
             "맑음"
           ],
           [
             "파고",
             "1-2",
-            "1-3",
+            "1-2",
             "1-3",
             "1-2",
             "1-2"
@@ -769,7 +769,7 @@
           "sunrise_set": "07:0117:36",
           "moonrise_set": "00:3214:22",
           "moon_img": 24,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/13.png",
           "month": 11
         },
         {
@@ -949,7 +949,7 @@
           "sunrise_set": "07:0617:31",
           "moonrise_set": "05:5716:31",
           "moon_img": 29,
-          "weather_img": "//images.badatime.com/weather/1.png",
+          "weather_img": "//images.badatime.com/weather/5.png",
           "month": 11
         },
         {
