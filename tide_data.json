@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T10:04:54.136604+09:00",
+  "updated": "2026-11-28T20:20:53.381301+09:00",
   "locations": {
     "내파수도": {
       "location_id": 1443,
@@ -34,7 +34,7 @@
                 "weather": "구름많고한때비",
                 "wind_dir": "북서-북",
                 "wind_speed": "6-15",
-                "wave": "0.5-3.0"
+                "wave": "1.0-3.0"
               },
               {
                 "when": "오후",
@@ -71,7 +71,7 @@
             "맑음",
             "흐림",
             "맑음",
-            "흐림",
+            "차차흐려짐",
             "흐림"
           ],
           [
@@ -80,7 +80,7 @@
             "1-1",
             "1-1",
             "1-1",
-            "1-1"
+            "1-2"
           ]
         ],
         "hourly_labels": [],
@@ -331,7 +331,7 @@
           "sunrise_set": "07:3117:20",
           "moonrise_set": "02:4614:09",
           "moon_img": 26,
-          "weather_img": "//images.badatime.com/weather/4.png",
+          "weather_img": "//images.badatime.com/weather/6.png",
           "month": 12
         },
         {
@@ -621,7 +621,7 @@
     },
     "자월도": {
       "location_id": 377,
-      "sea_temp": null,
+      "sea_temp": 13.8,
       "sea_weather": {
         "area": "인천·경기남부앞바다",
         "daily": [
@@ -670,14 +670,14 @@
                 "when": "오전",
                 "weather": "맑음",
                 "wind_dir": "남서-서",
-                "wind_speed": "5-11",
-                "wave": "0.5-1.5"
+                "wind_speed": "6-12",
+                "wave": "0.5-2.0"
               },
               {
                 "when": "오후",
                 "weather": "맑음",
-                "wind_dir": "남-남서",
-                "wind_speed": "5-10",
+                "wind_dir": "남서-서",
+                "wind_speed": "5-11",
                 "wave": "0.5-1.5"
               }
             ]
@@ -689,7 +689,7 @@
             "맑음",
             "흐림",
             "맑음",
-            "흐림",
+            "차차흐려짐",
             "흐림"
           ],
           [
@@ -698,7 +698,7 @@
             "1-1",
             "1-1",
             "1-1",
-            "1-1"
+            "1-2"
           ]
         ],
         "hourly_labels": [],
@@ -949,7 +949,7 @@
           "sunrise_set": "07:3317:17",
           "moonrise_set": "02:4714:08",
           "moon_img": 26,
-          "weather_img": "//images.badatime.com/weather/4.png",
+          "weather_img": "//images.badatime.com/weather/6.png",
           "month": 12
         },
         {
